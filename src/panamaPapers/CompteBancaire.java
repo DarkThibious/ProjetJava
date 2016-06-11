@@ -1,12 +1,12 @@
 package panamaPapers;
 
-public class CompteBancaire implements Possédé
+public class CompteBancaire implements Possede
 {
 	public int numero, solde;
 	public Banque hebergeur;
-	public Propriétaire p;
+	public Proprietaire p;
 
-	public CompteBancaire(Banque banque, Propriétaire p)
+	public CompteBancaire(Banque banque, Proprietaire p)
 	{
 		
 	}
@@ -23,7 +23,7 @@ public class CompteBancaire implements Possédé
 		}
 	}
 	
-	public Propriétaire getPropriétaire() 
+	public Proprietaire getProprietaire() 
 	{
 		return p;
 	}

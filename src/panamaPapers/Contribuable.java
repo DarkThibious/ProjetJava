@@ -2,7 +2,7 @@ package panamaPapers;
 
 import java.util.Date;
 
-public class Contribuable extends Propriétaire 
+public class Contribuable extends Proprietaire 
 {
 	Date birthday;
 	
