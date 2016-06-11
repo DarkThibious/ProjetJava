@@ -6,11 +6,10 @@ public class Banque extends Societe
 {
 	ArrayList<CompteBancaire> comptes;
 	int banqueNum;
+	int entier;
 	
 	public Banque(String nom, Pays rési, Proprietaire own)
 	{
-		
-		
 		this.nom = nom;
 		this.résidence = rési;
 		this.possesseur = own;
