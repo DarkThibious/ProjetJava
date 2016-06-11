@@ -74,14 +74,14 @@ public class Jeu
 		pays.get(6).contribuables.add(new Contribuable("Omar Sy",pays.get(6),"03/08/1969",banques.get(13)));
 		
 		/* Chine */ 
-		pays.get(7).contribuables.add(new Contribuable("Bernard Giraudeau",pays.get(7),"25/16/1987","DBS",this));
-		pays.get(7).contribuables.add(new Contribuable("Mark Walberg",pays.get(7),"07/09/1972","Bank of Singapour",this));
+		pays.get(7).contribuables.add(new Contribuable("Bernard Giraudeau",pays.get(7),"25/16/1987","China Construction Bank",this));
+		pays.get(7).contribuables.add(new Contribuable("Mark Walberg",pays.get(7),"07/09/1972","Bank of China",this));
 		pays.get(7).contribuables.add(new Contribuable("Paul Walker",pays.get(7),"24/11/1987",banques.get(14)));
 		pays.get(7).contribuables.add(new Contribuable("Homer Simpson",pays.get(7),"13/10/1984",banques.get(15)));
 		
 		/* Inde */
-		pays.get(8).contribuables.add(new Contribuable("Robet De Niro",pays.get(8),"07/03/1950","Bank of China",this));
-		pays.get(8).contribuables.add(new Contribuable("Sean Penn",pays.get(8),"12/02/1958","CIBC",this));
+		pays.get(8).contribuables.add(new Contribuable("Robet De Niro",pays.get(8),"07/03/1950","State Bank of India",this));
+		pays.get(8).contribuables.add(new Contribuable("Sean Penn",pays.get(8),"12/02/1958","Axis Bank",this));
 		pays.get(8).contribuables.add(new Contribuable("Jennifer Lawrence",pays.get(8),"09/09/1987",banques.get(16)));
 		pays.get(8).contribuables.add(new Contribuable("Liam Neeson",pays.get(8),"30/12/1966",banques.get(17)));
 		
