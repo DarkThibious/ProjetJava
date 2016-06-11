@@ -9,6 +9,8 @@ public class Banque extends Societe
 	
 	public Banque(String nom, Pays rési, Proprietaire own)
 	{
+		
+		
 		this.nom = nom;
 		this.résidence = rési;
 		this.possesseur = own;
