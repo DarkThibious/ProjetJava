@@ -8,7 +8,9 @@ public class CompteBancaire implements Propriete
 
 	public CompteBancaire(Banque banque, Proprietaire p)
 	{
-		
+		this.hebergeur = banque;
+		this.p = p;
+		this.solde = 0;
 	}
 	
 	public void transaction(CompteBancaire compte2, int montant)

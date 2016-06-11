@@ -12,6 +12,4 @@ public class Jeu
 		this.pays = new Pays[10];
 		this.banques = new Banque[10];
 	}
-	
-	
 }
