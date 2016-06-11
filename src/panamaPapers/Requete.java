@@ -3,21 +3,21 @@ package panamaPapers;
 public class Requete 
 {
 	Enqueteur demandeur;
-	Possede demandé;
-	Proprietaire résultat;
+	Propriete demande;
+	Proprietaire resultat;
 	int nbJours;
 	
-	public Requete(Enqueteur demandeur, Possede demandé, int coop)
+	public Requete(Enqueteur demandeur, Propriete demande, int coop)
 	{
 		this.demandeur = demandeur;
-		this.demandé = demandé;
+		this.demande = demande;
 		nbJours = coop + (int) Math.random()*10;
-		résultat = this.demandé.getProprietaire();
+		resultat = this.demande.getProprietaire();
 	}
 
 	@Override
 	public String toString()
 	{
-		return demandé.toString() + " --> " + résultat.toString();
+		return demande.toString() + " --> " + resultat.toString();
 	}
 }

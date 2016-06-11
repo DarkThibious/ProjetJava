@@ -1,6 +1,6 @@
 package panamaPapers;
 
-public interface Possede 
+public interface Propriete 
 {
 	public Proprietaire getProprietaire();
 }

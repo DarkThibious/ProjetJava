@@ -1,6 +1,6 @@
 package panamaPapers;
 
-public class CompteBancaire implements Possede
+public class CompteBancaire implements Propriete
 {
 	public int numero, solde;
 	public Banque hebergeur;

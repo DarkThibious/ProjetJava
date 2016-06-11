@@ -9,6 +9,10 @@ public class Proprietaire
 	CompteBancaire compte;
 	ArrayList<Societe> possessions;
 	
+	//constructeur vide
+	public Proprietaire(){}
+	
+	// normal
 	public Proprietaire(String nom, Pays rési, Banque bank)
 	{
 		this.nom = nom;
@@ -17,17 +21,14 @@ public class Proprietaire
 		this.possessions = new ArrayList<Societe>();
 	}
 	
-	public Proprietaire(String nom, Pays rési)
-	{
-		this.nom = nom;
-		this.résidence = rési;
-		this.possessions = new ArrayList<Societe>();
-	}
-	
+	// propriétaire d'une nouvelle banque
 	public Proprietaire(String nom, Pays rési, String bank)
 	{
 		this.nom = nom;
 		this.résidence = rési;
+		this.possessions = new ArrayList<Societe>();
+		Banque b = new Banque(nom, résidence, this);
+		this.compte = new CompteBancaire(b, this);
 	}
 	
 	

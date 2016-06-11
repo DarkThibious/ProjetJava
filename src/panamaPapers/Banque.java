@@ -9,7 +9,11 @@ public class Banque extends Societe
 	
 	public Banque(String nom, Pays rési, Proprietaire own)
 	{
-		super(nom, rési, own);
+		this.nom = nom;
+		this.résidence = rési;
+		this.possesseur = own;
 		this.compte = new CompteBancaire(this, this);
+		this.possessions = new ArrayList<Societe>();
+		this.comptes = new ArrayList<CompteBancaire>();
 	}
 }
