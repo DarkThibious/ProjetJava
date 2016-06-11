@@ -11,4 +11,10 @@ public class Contribuable extends Proprietaire
 		super(nom, rési, bank);
 		this.birthday = anniv;
 	}
+	
+	public Contribuable(String nom, Pays rési, Date anniv, String bank, Jeu jeu) 
+	{
+		super(nom, rési, bank, jeu);
+		this.birthday = anniv;
+	}
 }

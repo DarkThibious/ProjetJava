@@ -6,16 +6,16 @@ public class Banque extends Societe
 {
 	ArrayList<CompteBancaire> comptes;
 	int banqueNum;
-	int entier;
 	
-	public Banque(String nom, Pays rési, Proprietaire own)
+	public Banque(String nom, Pays rési, Proprietaire own, Jeu jeu)
 	{
 		this.nom = nom;
 		this.résidence = rési;
 		this.possesseur = own;
-		this.compte = new CompteBancaire(this, this);
 		this.possessions = new ArrayList<Societe>();
 		this.comptes = new ArrayList<CompteBancaire>();
+		this.banqueNum = jeu.banques.size()+(int)Math.random()*5; 
+		jeu.banques.add(this);
+		this.compte = new CompteBancaire(this, this);
 	}
 }
-/*juste testerrrrrr*/

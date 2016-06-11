@@ -32,4 +32,9 @@ public class Pays
 			}
 		}
 	}
+	
+	public String toString()
+	{
+		return nom;
+	}
 }

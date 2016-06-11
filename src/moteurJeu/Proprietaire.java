@@ -22,13 +22,18 @@ public class Proprietaire
 	}
 	
 	// propriétaire d'une nouvelle banque
-	public Proprietaire(String nom, Pays rési, String bank)
+	protected Proprietaire(String nom, Pays rési, String bank, Jeu jeu)
 	{
 		this.nom = nom;
 		this.résidence = rési;
 		this.possessions = new ArrayList<Societe>();
-		Banque b = new Banque(nom, résidence, this);
+		Banque b = new Banque(nom, résidence, this, jeu);
 		this.compte = new CompteBancaire(b, this);
+	}
+	
+	public String toString()
+	{
+		return nom +"\n" + résidence + "\n" + compte + "\n" + possessions;
 	}
 	
 	

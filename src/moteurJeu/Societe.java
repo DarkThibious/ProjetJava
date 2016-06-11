@@ -12,8 +12,20 @@ public class Societe extends Proprietaire implements Propriete
 		this.possesseur = own;
 	}
 	
+	//Création d'une nouvelle banque pour le compte de la société
+	public Societe(String nom, Pays rési, Proprietaire own, String bank, Jeu jeu)
+	{
+		super(nom, rési, bank, jeu);
+		this.possesseur = own;
+	}
+	
 	public Proprietaire getProprietaire()
 	{
 		return possesseur;
+	}
+	
+	public String toString()
+	{
+		return super.toString()+"Propriétaire : " + possesseur;
 	}
 }
