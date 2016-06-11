@@ -8,13 +8,14 @@ public class Pays
 	Enqueteur enqueteur;
 	int nbDénonciations;
 	ArrayList<Requete> requetes;
-	ArrayList<Contribuable> contribuables;
+   public ArrayList<Contribuable> contribuables;
 	
 	public Pays(String nom)
 	{
 		this.nom = nom;
 		this.nbDénonciations = 0;
 		this.enqueteur = null;
+		this.contribuables = new ArrayList<Contribuable>();
 	}
 	
 	public void setEnqueteur(Enqueteur enqueteur)
@@ -39,9 +40,4 @@ public class Pays
 		return nom;
 	}
 	
-	public void initContribuables()
-	{
-		this.contribuables = new ArrayList<Contribuable>();
-		//contribuables.add(new Contribuable())
-	}
 }
