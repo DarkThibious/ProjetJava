@@ -6,33 +6,65 @@ import java.util.Date;
 public class Jeu 
 {
 	int tour;
-	Pays[] pays;
 	ArrayList<Banque> banques;
+	ArrayList<Pays> pays;
 	
 	public Jeu()
 	{
 		this.tour = 0;
-		this.pays = new Pays[10];
+		this.pays = new ArrayList<Pays>();
 		this.banques = new ArrayList<Banque>();
+	}
+	
+	public void initPays()
+	{
+		pays.add(new Pays("France"));
+		pays.add(new Pays("Algérie"));
+		pays.add(new Pays("Chine"));
+		pays.add(new Pays("Quatar"));
+		pays.add(new Pays("Australie"));
+		pays.add(new Pays("USA"));
+		pays.add(new Pays("Panama"));
+		pays.add(new Pays("Caiman"));
+		pays.add(new Pays("Luxembourg"));
+		pays.add(new Pays("Maurice"));
+		pays.add(new Pays("Bahamas"));
+		pays.add(new Pays("Chypre"));
+		pays.add(new Pays("Djibouti"));
+		pays.add(new Pays("Malte"));
+		pays.add(new Pays("Irlande"));
+		pays.add(new Pays("Singapour"));
+		pays.add(new Pays("Suisse"));
+		pays.add(new Pays("Bemudes"));
+		pays.add(new Pays("Lettonie"));
+		pays.add(new Pays("Italie"));
+		pays.add(new Pays("Espagne"));
+		pays.add(new Pays("Allemagne"));
+		pays.add(new Pays("Portugal"));
+		pays.add(new Pays("Canade"));
+		pays.add(new Pays("Egypte"));
+		pays.add(new Pays("Dubai"));
+		pays.add(new Pays("Japan"));
+		pays.add(new Pays("Inde"));
+		pays.add(new Pays("Roumanie"));
+		pays.add(new Pays("Autriche"));
+		
+		System.out.println("nombre de pays = "+pays.size());
 	}
 	
 	public static void main(String[] args) 
 	{
 		Jeu jeu = new Jeu();
-		jeu.pays[0] = new Pays("France");
-		jeu.pays[1] = new Pays("Algérie");
-		jeu.pays[2] = new Pays("Chine");
-		jeu.pays[3] = new Pays("Qatar");
-		jeu.pays[4] = new Pays("Australie");
-		jeu.pays[5] = new Pays("USA");
-		jeu.pays[6] = new Pays("Panama");
-		jeu.pays[7] = new Pays("Cayman");
-		jeu.pays[8] = new Pays("Luxembourg");
-		jeu.pays[9] = new Pays("UK");
+		jeu.initPays();
 		
-		Contribuable c = new Contribuable("Billy", jeu.pays[0], new Date(0), "Thune Land", jeu);
-		Societe s = new Societe("Fric Corp", jeu.pays[1], c, jeu.banques.get(0));
+		Contribuable c = new Contribuable("Billy", jeu.pays.get(0),new Date(0), "Thune Land", jeu);
+		Societe s = new Societe("Fric Corp", jeu.pays.get(1), c, jeu.banques.get(0));
+
+
 		
 		System.out.println(c);
+		System.out.println(s);
+		
+
 	}
 }

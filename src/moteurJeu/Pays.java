@@ -8,6 +8,7 @@ public class Pays
 	Enqueteur enqueteur;
 	int nbDénonciations;
 	ArrayList<Requete> requetes;
+	ArrayList<Contribuable> contribuables;
 	
 	public Pays(String nom)
 	{
@@ -36,5 +37,11 @@ public class Pays
 	public String toString()
 	{
 		return nom;
+	}
+	
+	public void initContribuables()
+	{
+		this.contribuables = new ArrayList<Contribuable>();
+		//contribuables.add(new Contribuable())
 	}
 }
