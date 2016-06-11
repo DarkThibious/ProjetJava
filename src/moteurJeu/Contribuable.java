@@ -1,4 +1,4 @@
-package panamaPapers;
+package moteurJeu;
 
 import java.util.Date;
 

@@ -1,4 +1,4 @@
-package panamaPapers;
+package moteurJeu;
 
 public class Jeu 
 {
