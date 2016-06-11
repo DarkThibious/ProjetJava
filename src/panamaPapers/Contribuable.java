@@ -6,10 +6,9 @@ public class Contribuable extends Propriétaire
 {
 	Date birthday;
 	
-	public Contribuable(String nom, Pays rési, Date anniv) 
+	public Contribuable(String nom, Pays rési, Date anniv, Banque bank) 
 	{
-		super(nom, rési);
+		super(nom, rési, bank);
 		this.birthday = anniv;
-		
 	}
 }

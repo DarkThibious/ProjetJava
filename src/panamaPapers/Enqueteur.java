@@ -1,14 +1,15 @@
 package panamaPapers;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Enqueteur extends Contribuable 
 {
-	
+	ArrayList<Requete> infos;
 
-	public Enqueteur(String nom, Pays rési, Date anniv) 
+	public Enqueteur(String nom, Pays rési, Date anniv, Banque bank) 
 	{
-		super(nom, rési, anniv);
+		super(nom, rési, anniv, bank);
 		if(rési.enqueteur == null)
 		{
 			this.résidence.enqueteur = this;
@@ -18,5 +19,10 @@ public class Enqueteur extends Contribuable
 	public void declaration(Pays pays, CompteBancaire compte, Contribuable propriétaire)
 	{
 		
+	}
+
+	public void getInfos(Requete r) 
+	{
+		infos.add(r);
 	}
 }

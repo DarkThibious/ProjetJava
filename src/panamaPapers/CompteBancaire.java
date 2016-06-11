@@ -1,11 +1,16 @@
 package panamaPapers;
 
-public class CompteBancaire 
+public class CompteBancaire implements Possédé
 {
-	int numero, solde;
-	Banque hebergeur;
-	Propriétaire p;
+	public int numero, solde;
+	public Banque hebergeur;
+	public Propriétaire p;
 
+	public CompteBancaire(Banque banque, Propriétaire p)
+	{
+		
+	}
+	
 	public void transaction(CompteBancaire compte2, int montant)
 	{
 		if(compte2 == null || (compte2.solde - montant >= 0 && this.solde + montant >= 0))
@@ -16,5 +21,10 @@ public class CompteBancaire
 		{
 			compte2.solde -= montant;
 		}
+	}
+	
+	public Propriétaire getPropriétaire() 
+	{
+		return p;
 	}
 }
