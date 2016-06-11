@@ -1,13 +1,12 @@
 package moteurJeu;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Enqueteur extends Contribuable 
 {
 	ArrayList<Requete> infos;
 
-	public Enqueteur(String nom, Pays rési, Date anniv, Banque bank) 
+	public Enqueteur(String nom, Pays rési, String anniv, Banque bank) 
 	{
 		super(nom, rési, anniv, bank);
 		if(rési.enqueteur == null)

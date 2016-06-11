@@ -26,6 +26,6 @@ public class Societe extends Proprietaire implements Propriete
 	
 	public String toString()
 	{
-		return super.toString()+"Propriétaire : " + possesseur;
+		return super.toString()+"Propriétaire {\n" + possesseur+ "}\n";
 	}
 }

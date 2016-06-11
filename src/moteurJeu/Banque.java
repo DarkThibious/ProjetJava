@@ -12,10 +12,16 @@ public class Banque extends Societe
 		this.nom = nom;
 		this.résidence = rési;
 		this.possesseur = own;
+		this.possesseur.possessions.add(this);
 		this.possessions = new ArrayList<Societe>();
 		this.comptes = new ArrayList<CompteBancaire>();
-		this.banqueNum = jeu.banques.size()+(int)Math.random()*5; 
+		this.banqueNum = jeu.banques.size()+(int)(Math.random()*50); 
 		jeu.banques.add(this);
 		this.compte = new CompteBancaire(this, this);
+	}
+	
+	public String toString()
+	{
+		return super.toString() + "Numéro de la banque : " + banqueNum;
 	}
 }

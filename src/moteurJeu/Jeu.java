@@ -1,7 +1,6 @@
 package moteurJeu;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Jeu 
 {
@@ -57,13 +56,14 @@ public class Jeu
 		Jeu jeu = new Jeu();
 		jeu.initPays();
 		
-		Contribuable c = new Contribuable("Billy", jeu.pays.get(0),new Date(0), "Thune Land", jeu);
+		Contribuable c = new Contribuable("Billy", jeu.pays.get(0), "8/12/2484", "Thune Land", jeu);
 		Societe s = new Societe("Fric Corp", jeu.pays.get(1), c, jeu.banques.get(0));
 
 
 		
 		System.out.println(c);
 		System.out.println(s);
+		System.out.println(jeu.banques.get(0));
 		
 
 	}

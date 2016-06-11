@@ -11,7 +11,8 @@ public class CompteBancaire implements Propriete
 		this.hebergeur = banque;
 		this.p = p;
 		this.solde = 0;
-		this.numero = banque.banqueNum*5 + banque.comptes.size()+1;
+		this.numero = banque.banqueNum*100 + banque.comptes.size()+1;
+		this.hebergeur.comptes.add(this);
 	}
 	
 	public void transaction(CompteBancaire compte2, int montant)
@@ -33,6 +34,6 @@ public class CompteBancaire implements Propriete
 	
 	public String toString()
 	{
-		return "num : " + numero +"\n" + solde + "$\n";
+		return "numéro de compte : " + numero +"\n" + solde + "$";
 	}
 }

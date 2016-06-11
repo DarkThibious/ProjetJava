@@ -2,7 +2,7 @@ package moteurJeu;
 
 import java.util.ArrayList;
 
-public class Proprietaire 
+public abstract class Proprietaire 
 {
 	String nom;
 	Pays résidence;
@@ -27,13 +27,13 @@ public class Proprietaire
 		this.nom = nom;
 		this.résidence = rési;
 		this.possessions = new ArrayList<Societe>();
-		Banque b = new Banque(nom, résidence, this, jeu);
+		Banque b = new Banque(bank, résidence, this, jeu);
 		this.compte = new CompteBancaire(b, this);
 	}
 	
 	public String toString()
 	{
-		return nom +"\n" + résidence + "\n" + compte + "\n" + possessions;
+		return nom +"\n" + résidence + "\n" + compte + "\n";
 	}
 	
 	
