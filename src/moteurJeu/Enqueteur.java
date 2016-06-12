@@ -6,9 +6,9 @@ public class Enqueteur extends Contribuable
 {
 	ArrayList<Requete> infos;
 
-	public Enqueteur(String nom, Pays rési, String anniv, Banque bank) 
+	public Enqueteur(String nom, Pays rési, String anniv, Banque bank, int solde) 
 	{
-		super(nom, rési, anniv, bank);
+		super(nom, rési, anniv, bank, solde);
 		if(rési.enqueteur == null)
 		{
 			this.résidence.enqueteur = this;
