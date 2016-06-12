@@ -24,9 +24,10 @@ public class Jeu
 		pays.add(new Pays("Panama"));
 		pays.add(new Pays("Caiman"));
 		pays.add(new Pays("Malte"));
+		pays.add(new Pays("Chine"));
 		pays.add(new Pays("Inde"));
 		pays.add(new Pays("Singapour"));
-		pays.add(new Pays("Chine"));
+
 	
 		System.out.println("nombre de pays = "+pays.size());
 	}
@@ -91,20 +92,56 @@ public class Jeu
 		pays.get(9).contribuables.add(new Contribuable("Ralph Fiennes",pays.get(9),"24/11/1987",banques.get(18), 283137));
 		pays.get(9).contribuables.add(new Contribuable("Tom Hanks",pays.get(9),"13/10/1984",banques.get(19), 123762198));
 		
-
-		
-		
+	}
+	void initSociete()
+	{
+		/* D'abord selectionner aléatoirement 5 pays parmi les 10 , ils auront des contribuables  
+		 * qui possederont des sociétées */
+		int i=0,rand;
+		ArrayList<Pays> paysChoisis = new ArrayList<Pays>(); // contiendra les 5 pays choisis
+		ArrayList<Contribuable> contribuablesPS = new ArrayList<Contribuable>(); //  contiendra les 10 contibuables possedant des sociétés
+		while (i<5)
+		{
+			rand = (int)(Math.random()*10);
+			if(paysChoisis.indexOf(pays.get(rand)) == -1) // pour verifier qu'un pays figure une seule fois dans le tableau
+			{
+			paysChoisis.add(pays.get(rand));
+			System.out.println("pays choisi =  "+paysChoisis.get(i));
+			i+=1;
+			}
+		}
+		i = 0;
+		int alea;
+		/* A present selectionner aléatoirement les deux contribuables pour chaque pays , qui posseront des sociétés */
+		while(i<5)
+		{
+			rand = (int)(Math.random()*4);
+			alea = (int)(Math.random()*4);
+			if(rand != alea)
+			{
+				contribuablesPS.add(paysChoisis.get(i).contribuables.get(rand));
+				contribuablesPS.add(paysChoisis.get(i).contribuables.get(alea));
+				i+=1;
+			}
+		}
+		/* Mintenant pour tous ces contribuables : on va leur crée leur sociétés */
+		contribuablesPS.get(0).possessions.add(new Societe("Auchan",contribuablesPS.get(0).résidence,contribuablesPS.get(0),banques.get(0),12000));
 	}
 	public static void main(String[] args) 
 	{
 		Jeu jeu = new Jeu();
 		jeu.initPays();
 		jeu.initContribuables();
+		/*
 		for(Banque i : jeu.banques)
 		{
 			System.out.println(i.banqueNum);
 		}
+		*/
+		jeu.initSociete();
+		//System.out.println(jeu.pays.indexOf(jeu.pays.get(0)));
 	//	Contribuable c = new Contribuable("Billy", jeu.pays.get(0), "8/12/2484", "Thune Land", jeu);
 	//	Societe s = new Societe("Fric Corp", jeu.pays.get(1), c, jeu.banques.get(0));
+
 	}
 }
