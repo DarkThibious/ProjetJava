@@ -33,7 +33,14 @@ public abstract class Proprietaire
 	
 	public String toString()
 	{
-		return nom +"\n" + résidence + "\n" + compte + "\n";
+		String s = nom +"\n" + résidence + "\n" + compte + "\n";
+		s += "Possessions {";
+		for(Societe p : this.possessions)
+		{
+			s += p.toString();
+		}
+		s+="}\n";
+		return s;
 	}
 	
 	

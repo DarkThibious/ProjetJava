@@ -1,6 +1,7 @@
 package moteurJeu;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Jeu 
 {
@@ -93,6 +94,7 @@ public class Jeu
 		pays.get(9).contribuables.add(new Contribuable("Tom Hanks",pays.get(9),"13/10/1984",banques.get(19), 123762198));
 		
 	}
+	
 	void initSociete()
 	{
 		/* D'abord selectionner aléatoirement 5 pays parmi les 10 , ils auront des contribuables  
@@ -127,33 +129,44 @@ public class Jeu
 		/* Mintenant pour tous ces contribuables : on va leur crée leur sociétés */
 		contribuablesPS.get(0).possessions.add(new Societe("Auchan",contribuablesPS.get(0).résidence,contribuablesPS.get(0),banques.get(0),12000));
 		
+		creerSocieteAlea("A", contribuablesPS, this);
+		creerSocieteAlea("B", contribuablesPS, this);
+		creerSocieteAlea("C", contribuablesPS, this);
+		creerSocieteAlea("D", contribuablesPS, this);
+		creerSocieteAlea("E", contribuablesPS, this);
+		creerSocieteAlea("F", contribuablesPS, this);
+		creerSocieteAlea("G", contribuablesPS, this);
+		creerSocieteAlea("H", contribuablesPS, this);
+		
+		for(Contribuable c : contribuablesPS)
+		{
+			System.out.println(c);
+			System.out.println("");
+		}
+		for(Banque b : banques)
+		{
+			System.out.println(b);
+			System.out.println("");
+		}
 	}
 	
 	public void creerSocieteAlea(String nom, ArrayList<Contribuable> contribuablesPS, Jeu jeu)
 	{
-		int o = (int) Math.random()*(contribuablesPS.size() + jeu.banques.size()-1);
+		Random r = new Random();
+		int o = r.nextInt(contribuablesPS.size());
 		Proprietaire p;
-		if(o > contribuablesPS.size()-1)
-		{
-			p = jeu.banques.get(o).getProprietaire();
-		}
-		else
-		{
-			p = contribuablesPS.get(o);
-		}
-		
+		p = contribuablesPS.get(o);
+				
 		o = 0;
-		while(o == p.possessions.size());
+		while(o != p.possessions.size())
 		{
-			o = (int) Math.random() *(p.possessions.size());
+			o = r.nextInt(p.possessions.size()+1);
 			if(o < p.possessions.size())
 			{
 				p = p.possessions.get(o);
 			}
 		}
-		
-		new Societe(nom, jeu.pays.get((int) Math.random()*jeu.pays.size()-1), p, jeu.banques.get((int) Math.random()*jeu.banques.size()-1), (int) Math.random() * 1000000000);
-		
+		new Societe(nom, jeu.pays.get(r.nextInt(jeu.pays.size())), p, jeu.banques.get(r.nextInt(jeu.banques.size())), r.nextInt(1000000000));
 	}
 	
 	public static void main(String[] args) 

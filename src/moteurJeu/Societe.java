@@ -10,6 +10,7 @@ public class Societe extends Proprietaire implements Propriete
 	{
 		super(nom, rési, bank, solde);
 		this.possesseur = own;
+		this.possesseur.possessions.add(this);
 	}
 	
 	//Création d'une nouvelle banque pour le compte de la société
@@ -17,15 +18,11 @@ public class Societe extends Proprietaire implements Propriete
 	{
 		super(nom, rési, bank, soldeBank, jeu, solde);
 		this.possesseur = own;
+		this.possesseur.possessions.add(this);
 	}
 	
 	public Proprietaire getProprietaire()
 	{
 		return possesseur;
-	}
-	
-	public String toString()
-	{
-		return super.toString()+"Propriétaire {\n" + possesseur+ "}\n";
 	}
 }
