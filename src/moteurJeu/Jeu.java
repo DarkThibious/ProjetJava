@@ -126,7 +126,36 @@ public class Jeu
 		}
 		/* Mintenant pour tous ces contribuables : on va leur crée leur sociétés */
 		contribuablesPS.get(0).possessions.add(new Societe("Auchan",contribuablesPS.get(0).résidence,contribuablesPS.get(0),banques.get(0),12000));
+		
 	}
+	
+	public void creerSocieteAlea(String nom, ArrayList<Contribuable> contribuablesPS, Jeu jeu)
+	{
+		int o = (int) Math.random()*(contribuablesPS.size() + jeu.banques.size()-1);
+		Proprietaire p;
+		if(o > contribuablesPS.size()-1)
+		{
+			p = jeu.banques.get(o).getProprietaire();
+		}
+		else
+		{
+			p = contribuablesPS.get(o);
+		}
+		
+		o = 0;
+		while(o == p.possessions.size());
+		{
+			o = (int) Math.random() *(p.possessions.size());
+			if(o < p.possessions.size())
+			{
+				p = p.possessions.get(o);
+			}
+		}
+		
+		new Societe(nom, jeu.pays.get((int) Math.random()*jeu.pays.size()-1), p, jeu.banques.get((int) Math.random()*jeu.banques.size()-1), (int) Math.random() * 1000000000);
+		
+	}
+	
 	public static void main(String[] args) 
 	{
 		Jeu jeu = new Jeu();
