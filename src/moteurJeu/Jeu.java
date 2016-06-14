@@ -126,7 +126,7 @@ public class Jeu
 				i+=1;
 			}
 		}
-		/* Mintenant pour tous ces contribuables : on va leur crée leur sociétés */
+		/* Maintenant pour tous ces contribuables : on va leur crée leur sociétés */
 		contribuablesPS.get(0).possessions.add(new Societe("Auchan",contribuablesPS.get(0).résidence,contribuablesPS.get(0),banques.get(0),12000));
 		
 		creerSocieteAlea("A", contribuablesPS, this);
@@ -169,6 +169,8 @@ public class Jeu
 		new Societe(nom, jeu.pays.get(r.nextInt(jeu.pays.size())), p, jeu.banques.get(r.nextInt(jeu.banques.size())), r.nextInt(1000000000));
 	}
 	
+	/* Fonction qui genere la liste des denonciations */
+	//void 
 	public static void main(String[] args) 
 	{
 		Jeu jeu = new Jeu();
