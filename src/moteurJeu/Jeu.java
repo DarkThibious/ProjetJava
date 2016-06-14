@@ -212,10 +212,14 @@ public class Jeu
 		for(i=0;i<10;i++)
 		{
 			System.out.print("solde initial compte src = "+comptesSuspectes.get(i).solde);
-			int montant= (int)(Math.random()*comptesSuspectes.get(i).solde);
+			int montant= (int)(Math.random()*(comptesSuspectes.get(i).solde-1));
 			registre.denonciations.add(new Transaction(comptesSuspectes.get(i),comptesSuspectes.get(19-i),
 					montant));
 			System.out.println(" ,num compte src: "+comptesSuspectes.get(i).numero+", num compre dest: "+comptesSuspectes.get(19-i).numero+" montant transféré = "+montant);
+			
+			
+			//System.out.println(registre.denonciations.get(i));//methode affichage avec toString , les 2 prints précedents affichent 
+																					//le meme resultat.
 		}
 	}
 	
@@ -234,7 +238,7 @@ public class Jeu
 		jeu.genereDenontiations();
 	//	Contribuable c = new Contribuable("Billy", jeu.pays.get(0), "8/12/2484", "Thune Land", jeu);
 	//	Societe s = new Societe("Fric Corp", jeu.pays.get(1), c, jeu.banques.get(0));
-	//	System.out.println((int)(Math.random()*(20-5)));
+	//	System.out.println((int)(Math.random()*(0-0)));
 
 	}
 }

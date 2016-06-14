@@ -14,6 +14,10 @@ public class Transaction {
 		this.destination.solde=this.destination.solde-montant;
 	}
 	
-	
+	public String toString()
+	{
+		return  "solde initial compte source : " + source.solde +" ,montant transféré : "+ this.montant + " ,numero de compte source : " + this.source.numero
+				+" ,numero de compte destination : " + this.destination.numero;
+	}
 	
 }
