@@ -8,12 +8,14 @@ public class Jeu
 	int tour;
 	ArrayList<Banque> banques;
 	ArrayList<Pays> pays;
+	RegistreCentral registre;
 	
 	public Jeu()
 	{
 		this.tour = 0;
 		this.pays = new ArrayList<Pays>();
 		this.banques = new ArrayList<Banque>();
+		this.registre = new RegistreCentral();
 	}
 	
 	public void initPays()
@@ -170,7 +172,53 @@ public class Jeu
 	}
 	
 	/* Fonction qui genere la liste des denonciations */
-	//void 
+	void genereDenontiations()
+	{
+		/* Selectionner aléatoirement 10 parmi les 20 */
+		int i=0,rand;
+		ArrayList<Banque> banquesChoisies = new ArrayList<Banque>(); // contiendra les 10 banques choisies
+		ArrayList<CompteBancaire> comptesSuspectes = new ArrayList<CompteBancaire>(); // contiendra les 20 comptes suspectes
+		while (i<10)
+		{
+			rand = (int)(Math.random()*10);
+			if(banquesChoisies.indexOf(banques.get(rand)) == -1) // pour verifier qu'un pays figure une seule fois dans le tableau
+			{
+				banquesChoisies.add(banques.get(rand));
+				//System.out.println("banque choisie =  "+banquesChoisies.get(i).nom);
+				i+=1;
+			}
+		}
+		
+		/* Selectionner aléatoirement deux comptes suspectes pour chaque banque */
+		int alea;
+		i=0;
+		
+		while(i<10)
+		{
+			rand = (int)(Math.random()*banquesChoisies.get(i).comptes.size());// tirer un chiffre entre 0 et le nombre de comptes
+			alea = (int)(Math.random()*banquesChoisies.get(i).comptes.size());
+			if(rand != alea)
+			{
+				comptesSuspectes.add(banquesChoisies.get(i).comptes.get(rand));
+				comptesSuspectes.add(banquesChoisies.get(i).comptes.get(alea));
+				//System.out.println("compte choisi =  "+banquesChoisies.get(i).comptes.get(rand).numero);
+				//System.out.println("compte choisi =  "+banquesChoisies.get(i).comptes.get(alea).numero);
+				i+=1;
+			}
+		}
+		//System.out.println("nombre de comptes suspectes =  "+comptesSuspectes.size());
+		
+		/* Generer les denonciations */
+		for(i=0;i<10;i++)
+		{
+			System.out.print("solde initial compte src = "+comptesSuspectes.get(i).solde);
+			int montant= (int)(Math.random()*comptesSuspectes.get(i).solde);
+			registre.denonciations.add(new Transaction(comptesSuspectes.get(i),comptesSuspectes.get(19-i),
+					montant));
+			System.out.println(" ,num compte src: "+comptesSuspectes.get(i).numero+", num compre dest: "+comptesSuspectes.get(19-i).numero+" montant transféré = "+montant);
+		}
+	}
+	
 	public static void main(String[] args) 
 	{
 		Jeu jeu = new Jeu();
@@ -183,9 +231,10 @@ public class Jeu
 		}
 		*/
 		jeu.initSociete();
-		//System.out.println(jeu.pays.indexOf(jeu.pays.get(0)));
+		jeu.genereDenontiations();
 	//	Contribuable c = new Contribuable("Billy", jeu.pays.get(0), "8/12/2484", "Thune Land", jeu);
 	//	Societe s = new Societe("Fric Corp", jeu.pays.get(1), c, jeu.banques.get(0));
+	//	System.out.println((int)(Math.random()*(20-5)));
 
 	}
 }
