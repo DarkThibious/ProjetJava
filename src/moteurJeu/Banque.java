@@ -10,7 +10,7 @@ public class Banque extends Societe
 	public Banque(String nom, Pays rési, Proprietaire own, Jeu jeu, int solde)
 	{
 		this.nom = nom;
-		this.résidence = rési;
+		this.residence = rési;
 		this.possesseur = own;
 		this.possesseur.possessions.add(this);
 		this.possessions = new ArrayList<Societe>();

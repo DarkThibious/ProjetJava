@@ -5,10 +5,10 @@ import java.util.Random;
 
 public class Jeu 
 {
-	int tour;
-	ArrayList<Banque> banques;
-	ArrayList<Pays> pays;
-	RegistreCentral registre;
+	public int tour;
+	public ArrayList<Banque> banques;
+	public ArrayList<Pays> pays;
+	public RegistreCentral registre;
 	
 	public Jeu()
 	{
@@ -97,7 +97,7 @@ public class Jeu
 		
 	}
 	
-	void initSociete()
+	public void initSociete()
 	{
 		/* D'abord selectionner aléatoirement 5 pays parmi les 10 , ils auront des contribuables  
 		 * qui possederont des sociétées */
@@ -129,7 +129,7 @@ public class Jeu
 			}
 		}
 		/* Maintenant pour tous ces contribuables : on va leur crée leur sociétés */
-		contribuablesPS.get(0).possessions.add(new Societe("Auchan",contribuablesPS.get(0).résidence,contribuablesPS.get(0),banques.get(0),12000));
+		contribuablesPS.get(0).possessions.add(new Societe("Auchan",contribuablesPS.get(0).residence,contribuablesPS.get(0),banques.get(0),12000));
 		
 		creerSocieteAlea("A", contribuablesPS, this);
 		creerSocieteAlea("B", contribuablesPS, this);
@@ -172,7 +172,7 @@ public class Jeu
 	}
 	
 	/* Fonction qui genere la liste des denonciations */
-	void genereTransactionsSuspectes()
+	public void genereTransactionsSuspectes()
 	{
 		/* Selectionner aléatoirement 10 parmi les 20 */
 		int i=0,rand;
@@ -211,16 +211,5 @@ public class Jeu
 			registre.suspects.add(new Transaction(comptesSuspectes.get(i),comptesSuspectes.get(19-i),montant));
 			System.out.println(registre.suspects.get(i)); //Affichage de la liste des transactions suspectes
 		}
-	}
-	
-	public static void main(String[] args) 
-	{
-		Jeu jeu = new Jeu();
-		jeu.initPays();
-		jeu.initContribuables();
-		jeu.initSociete();
-		jeu.genereTransactionsSuspectes();
-		//System.out.println((int)(Math.random()*(20-15)));
-
-	}
+	}	
 }

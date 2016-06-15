@@ -6,12 +6,12 @@ public class Enqueteur extends Contribuable
 {
 	ArrayList<Requete> infos;
 
-	public Enqueteur(String nom, Pays rési, String anniv, Banque bank, int solde) 
+	public Enqueteur(String nom, Pays resi, String anniv, Banque bank, int solde) 
 	{
-		super(nom, rési, anniv, bank, solde);
-		if(rési.enqueteur == null)
+		super(nom, resi, anniv, bank, solde);
+		if(resi.enqueteur == null)
 		{
-			this.résidence.enqueteur = this;
+			this.residence.enqueteur = this;
 		}
 	}
 

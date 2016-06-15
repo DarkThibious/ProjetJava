@@ -1,8 +1,8 @@
 package moteurJeu;
 
 public class Transaction {
-	CompteBancaire source;
-	CompteBancaire destination;
+	public CompteBancaire source;
+	public CompteBancaire destination;
 	int montant;
 	
 	public Transaction(CompteBancaire source, CompteBancaire destination, int montant) 

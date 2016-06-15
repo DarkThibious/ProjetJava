@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 public class Pays
 {
-	String nom;
-	Enqueteur enqueteur;
-	int nbDénonciations;
-	ArrayList<Requete> requetes;
-   public ArrayList<Contribuable> contribuables;
+	public String nom;
+	public Enqueteur enqueteur;
+	public int nbDénonciations;
+	public ArrayList<Requete> requetes;
+	public ArrayList<Contribuable> contribuables;
 	
 	public Pays(String nom)
 	{
