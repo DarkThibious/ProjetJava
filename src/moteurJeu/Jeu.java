@@ -42,19 +42,19 @@ public class Jeu
 		pays.get(0).contribuables.add(new Contribuable("Washington Denzel",pays.get(0),"30/12/1980", banques.get(1), 90000));
 		
 		/* USA */
-		pays.get(1).contribuables.add(new Contribuable("Harrison Ford",pays.get(1),"14/08/1974","Bank of America", 400000000, this, 123));
+		pays.get(1).contribuables.add(new Contribuable("Harrison Ford",pays.get(1),"14/08/1974","Bank of America", 400000000, this, 1230));
 		pays.get(1).contribuables.add(new Contribuable("Obi-Wan Kenobi",pays.get(1),"17/02/1979","US Bank", 2879000, this, 5000000));
 		pays.get(1).contribuables.add(new Contribuable("Michael Jackson",pays.get(1),"31/03/1981", banques.get(2), 25000));
 		pays.get(1).contribuables.add(new Contribuable("Barack Obama",pays.get(1),"22/06/1990", banques.get(3), 666666666));
 		
 		/* Suisse */
 		pays.get(2).contribuables.add(new Contribuable("Alain Delon",pays.get(2),"15/02/1950","UBS", 23321, this, 123781238));
-		pays.get(2).contribuables.add(new Contribuable("Gérard Depardieu",pays.get(2),"10/01/1947","Credit Swiss", 2, this, 890875));
+		pays.get(2).contribuables.add(new Contribuable("Gérard Depardieu",pays.get(2),"10/01/1947","Credit Swiss", 200000000, this, 890875));
 		pays.get(2).contribuables.add(new Contribuable("Sean Connery",pays.get(2),"29/11/1983",banques.get(4), 90000));
 		pays.get(2).contribuables.add(new Contribuable("Johnny Deep",pays.get(2),"04/12/1991",banques.get(5), 8782));
 		
 		/* Ile Maurice */
-		pays.get(3).contribuables.add(new Contribuable("Léonardo DiCpario",pays.get(3),"05/01/1960","Banque de Maurice",23241222,this, 231));
+		pays.get(3).contribuables.add(new Contribuable("Léonardo DiCpario",pays.get(3),"05/01/1960","Banque de Maurice",23241222,this, 2310));
 		pays.get(3).contribuables.add(new Contribuable("Robet Downey",pays.get(3),"17/05/1986","HSBC",12313, this, 82301398));
 		pays.get(3).contribuables.add(new Contribuable("Katharine Hepburn",pays.get(3),"08/12/1980",banques.get(6), 67));
 		pays.get(3).contribuables.add(new Contribuable("Michel Blanc",pays.get(3),"31/12/1984",banques.get(7), 5));
@@ -79,7 +79,7 @@ public class Jeu
 		
 		/* Chine */ 
 		pays.get(7).contribuables.add(new Contribuable("Bernard Giraudeau",pays.get(7),"25/16/1987","China Construction Bank",1412442, this, 532403));
-		pays.get(7).contribuables.add(new Contribuable("Mark Walberg",pays.get(7),"07/09/1972","Bank of China",123124,this, 6678698));
+		pays.get(7).contribuables.add(new Contribuable("Mark Walberg",pays.get(7),"07/09/1972","Bank of China",1231240,this, 6678698));
 		pays.get(7).contribuables.add(new Contribuable("Paul Walker",pays.get(7),"24/11/1987",banques.get(14), 1236123));
 		pays.get(7).contribuables.add(new Contribuable("Homer Simpson",pays.get(7),"13/10/1984",banques.get(15), 2263239));
 		
@@ -172,7 +172,7 @@ public class Jeu
 	}
 	
 	/* Fonction qui genere la liste des denonciations */
-	void genereDenontiations()
+	void genereTransactionsSuspectes()
 	{
 		/* Selectionner aléatoirement 10 parmi les 20 */
 		int i=0,rand;
@@ -184,7 +184,6 @@ public class Jeu
 			if(banquesChoisies.indexOf(banques.get(rand)) == -1) // pour verifier qu'un pays figure une seule fois dans le tableau
 			{
 				banquesChoisies.add(banques.get(rand));
-				//System.out.println("banque choisie =  "+banquesChoisies.get(i).nom);
 				i+=1;
 			}
 		}
@@ -201,25 +200,16 @@ public class Jeu
 			{
 				comptesSuspectes.add(banquesChoisies.get(i).comptes.get(rand));
 				comptesSuspectes.add(banquesChoisies.get(i).comptes.get(alea));
-				//System.out.println("compte choisi =  "+banquesChoisies.get(i).comptes.get(rand).numero);
-				//System.out.println("compte choisi =  "+banquesChoisies.get(i).comptes.get(alea).numero);
 				i+=1;
 			}
 		}
-		//System.out.println("nombre de comptes suspectes =  "+comptesSuspectes.size());
 		
-		/* Generer les denonciations */
+		/* Generer les transactions suspectes */
 		for(i=0;i<10;i++)
 		{
-			//System.out.print("solde initial compte src = "+comptesSuspectes.get(i).solde);
-			int montant= (int)(Math.random()*(comptesSuspectes.get(i).solde-1));
-			registre.denonciations.add(new Transaction(comptesSuspectes.get(i),comptesSuspectes.get(19-i),
-					montant));
-			//System.out.println(" ,num compte src: "+comptesSuspectes.get(i).numero+", num compre dest: "+comptesSuspectes.get(19-i).numero+" montant transféré = "+montant);
-			
-			
-			System.out.println(registre.denonciations.get(i));//methode affichage avec toString , les 2 prints précedents affichent 
-																					//le meme resultat.
+			int montant= (int)(Math.random()*(comptesSuspectes.get(i).solde-1)+1);
+			registre.suspects.add(new Transaction(comptesSuspectes.get(i),comptesSuspectes.get(19-i),montant));
+			System.out.println(registre.suspects.get(i)); //Affichage de la liste des transactions suspectes
 		}
 	}
 	
@@ -228,17 +218,9 @@ public class Jeu
 		Jeu jeu = new Jeu();
 		jeu.initPays();
 		jeu.initContribuables();
-		/*
-		for(Banque i : jeu.banques)
-		{
-			System.out.println(i.banqueNum);
-		}
-		*/
 		jeu.initSociete();
-		jeu.genereDenontiations();
-	//	Contribuable c = new Contribuable("Billy", jeu.pays.get(0), "8/12/2484", "Thune Land", jeu);
-	//	Societe s = new Societe("Fric Corp", jeu.pays.get(1), c, jeu.banques.get(0));
-	//	System.out.println((int)(Math.random()*(0-0)));
+		jeu.genereTransactionsSuspectes();
+		//System.out.println((int)(Math.random()*(20-15)));
 
 	}
 }

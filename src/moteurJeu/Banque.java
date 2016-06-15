@@ -15,7 +15,7 @@ public class Banque extends Societe
 		this.possesseur.possessions.add(this);
 		this.possessions = new ArrayList<Societe>();
 		this.comptes = new ArrayList<CompteBancaire>();
-		this.banqueNum = jeu.banques.size()+((int)(Math.random()*25)*100); 
+		this.banqueNum = jeu.banques.size()+((int)((Math.random()*25)+1)*100); 
 		jeu.banques.add(this);
 		this.compte = new CompteBancaire(this, this, solde);
 	}
