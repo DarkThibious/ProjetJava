@@ -16,8 +16,8 @@ public class Transaction {
 	
 	public String toString()
 	{
-		return  "solde initial compte source : " + source.solde +" ,montant transféré : "+ this.montant + " ,numero de compte source : " + this.source.numero
-				+" ,numero de compte destination : " + this.destination.numero;
+		return  "solde initial compte source : " + source.solde +",\tmontant transféré : "+ this.montant + ", \tnumero de compte source : " + this.source.numero
+				+", \tnumero de compte destination : " + this.destination.numero;
 	}
 	
 }

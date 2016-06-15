@@ -211,14 +211,14 @@ public class Jeu
 		/* Generer les denonciations */
 		for(i=0;i<10;i++)
 		{
-			System.out.print("solde initial compte src = "+comptesSuspectes.get(i).solde);
+			//System.out.print("solde initial compte src = "+comptesSuspectes.get(i).solde);
 			int montant= (int)(Math.random()*(comptesSuspectes.get(i).solde-1));
 			registre.denonciations.add(new Transaction(comptesSuspectes.get(i),comptesSuspectes.get(19-i),
 					montant));
-			System.out.println(" ,num compte src: "+comptesSuspectes.get(i).numero+", num compre dest: "+comptesSuspectes.get(19-i).numero+" montant transféré = "+montant);
+			//System.out.println(" ,num compte src: "+comptesSuspectes.get(i).numero+", num compre dest: "+comptesSuspectes.get(19-i).numero+" montant transféré = "+montant);
 			
 			
-			//System.out.println(registre.denonciations.get(i));//methode affichage avec toString , les 2 prints précedents affichent 
+			System.out.println(registre.denonciations.get(i));//methode affichage avec toString , les 2 prints précedents affichent 
 																					//le meme resultat.
 		}
 	}
