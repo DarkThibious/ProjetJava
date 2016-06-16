@@ -15,7 +15,7 @@ public class CompteBancaire implements Propriete
 		this.hebergeur.comptes.add(this);
 	}
 	
-	public void transaction(CompteBancaire compte2, int montant)
+	public void transfert(CompteBancaire compte2, int montant)
 	{
 		if(compte2 == null || (compte2.solde - montant >= 0 && this.solde + montant >= 0))
 		{

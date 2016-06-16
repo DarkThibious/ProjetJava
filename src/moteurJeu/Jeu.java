@@ -3,6 +3,10 @@ package moteurJeu;
 import java.util.ArrayList;
 import java.util.Random;
 
+/** Jeu est la classe regroupant les informations nécessaires à une partie.
+ * @author yasmine
+ *
+ */
 public class Jeu 
 {
 	public int tour;
@@ -10,6 +14,9 @@ public class Jeu
 	public ArrayList<Pays> pays;
 	public RegistreCentral registre;
 	
+	/** Contructeur de la classe jeu
+	 * 
+	 */
 	public Jeu()
 	{
 		this.tour = 0;
@@ -18,6 +25,9 @@ public class Jeu
 		this.registre = new RegistreCentral();
 	}
 	
+	/** Initialise la liste des pays.
+	 * 
+	 */
 	public void initPays()
 	{
 		pays.add(new Pays("France"));
@@ -30,10 +40,11 @@ public class Jeu
 		pays.add(new Pays("Chine"));
 		pays.add(new Pays("Inde"));
 		pays.add(new Pays("Singapour"));
-
-	
-		System.out.println("nombre de pays = "+pays.size());
 	}
+	
+	/** Initialise la liste des contribuables,
+	 *  Crée des contribuables pour tous les pays.
+	 */
 	public void initContribuables()
 	{	/* France */
 		pays.get(0).contribuables.add(new Contribuable("Will Smith",pays.get(0),"30/12/1980","Société générale", 2000000, this, 50000));
@@ -97,26 +108,35 @@ public class Jeu
 		
 	}
 	
+	/** Initialise les societes des contribuables,
+	 *  Crée des societés pour des contribuables aléatoirement selectionnés.
+	 */
 	public void initSociete()
 	{
-		/* D'abord selectionner aléatoirement 5 pays parmi les 10 , ils auront des contribuables  
+		/* D'abord selectionne aléatoirement 5 pays parmi les 10 , ils auront des contribuables  
 		 * qui possederont des sociétées */
 		int i=0,rand;
 		ArrayList<Pays> paysChoisis = new ArrayList<Pays>(); // contiendra les 5 pays choisis
 		ArrayList<Contribuable> contribuablesPS = new ArrayList<Contribuable>(); //  contiendra les 10 contibuables possedant des sociétés
+		String[] nomsSocietes = {"Wayne Entreprises", "Stark Industries", "Queen Consolidated", "Palmer Technologies", "Holowan Laboratories",
+				"Chantiers Navals de Kuat", "Umbrella Corporation", "General Emballages", "Soummam", "Cevital", "Sol Entreprise", "Ifri",
+				"Select Line Corporation","Maruti","Vault Tech","Keysight Technologies","Egar'Tech","One Republic","Flander's Company",
+				"The Daily Planet", "ACME", "Krusty Burger","Duff","Sacre Coeur","Centre nucleaire de M. Burns","International Banana Company"
+				,"Boucherie Sanzot","Cyber Panda", "Czerka Corporation", "Cantina de Mos Esley", "Moe's","Chez Watto","Matina","Safina"
+				,"Tapidor","Nedjma","Djezzy"};
+		
 		while (i<5)
 		{
 			rand = (int)(Math.random()*10);
 			if(paysChoisis.indexOf(pays.get(rand)) == -1) // pour verifier qu'un pays figure une seule fois dans le tableau
 			{
-			paysChoisis.add(pays.get(rand));
-			System.out.println("pays choisi =  "+paysChoisis.get(i));
-			i+=1;
+				paysChoisis.add(pays.get(rand));
+				i+=1;
 			}
 		}
 		i = 0;
 		int alea;
-		/* A present selectionner aléatoirement les deux contribuables pour chaque pays , qui posseront des sociétés */
+		/* selectionne aléatoirement les deux contribuables pour chaque pays , qui posseront des sociétés */
 		while(i<5)
 		{
 			rand = (int)(Math.random()*4);
@@ -128,18 +148,13 @@ public class Jeu
 				i+=1;
 			}
 		}
-		/* Maintenant pour tous ces contribuables : on va leur crée leur sociétés */
-		contribuablesPS.get(0).possessions.add(new Societe("Auchan",contribuablesPS.get(0).residence,contribuablesPS.get(0),banques.get(0),12000));
-		
-		creerSocieteAlea("A", contribuablesPS, this);
-		creerSocieteAlea("B", contribuablesPS, this);
-		creerSocieteAlea("C", contribuablesPS, this);
-		creerSocieteAlea("D", contribuablesPS, this);
-		creerSocieteAlea("E", contribuablesPS, this);
-		creerSocieteAlea("F", contribuablesPS, this);
-		creerSocieteAlea("G", contribuablesPS, this);
-		creerSocieteAlea("H", contribuablesPS, this);
-		
+		/* crée des sociétés pour tous les contribuables */
+
+		for(i=0;i<nomsSocietes.length;i++)
+		{
+			creerSocieteAlea(nomsSocietes[i], contribuablesPS, this);
+		}
+		/*
 		for(Contribuable c : contribuablesPS)
 		{
 			System.out.println(c);
@@ -150,8 +165,17 @@ public class Jeu
 			System.out.println(b);
 			System.out.println("");
 		}
+		*/
 	}
 	
+	/** Crée les sociétés aléatoirement
+	 * @param nom 
+	 *			nom de la société.		
+	 * @param contribuablesPS
+	 * 			liste des contribuables possedant des sociétés.
+	 * @param jeu
+	 * 			jeu dans lequel les sociétés sont créées.
+	 */
 	public void creerSocieteAlea(String nom, ArrayList<Contribuable> contribuablesPS, Jeu jeu)
 	{
 		Random r = new Random();
@@ -171,10 +195,13 @@ public class Jeu
 		new Societe(nom, jeu.pays.get(r.nextInt(jeu.pays.size())), p, jeu.banques.get(r.nextInt(jeu.banques.size())), r.nextInt(1000000000));
 	}
 	
-	/* Fonction qui genere la liste des denonciations */
+	/**  Genere aléatoirement la liste des transactions suspectes
+	 * 	
+	 */
 	public void genereTransactionsSuspectes()
 	{
-		/* Selectionner aléatoirement 10 parmi les 20 */
+		System.out.println("Voici la liste des transactions suspectes : "); 
+		/* Selectionne aléatoirement 10 banques parmi les 20 */
 		int i=0,rand;
 		ArrayList<Banque> banquesChoisies = new ArrayList<Banque>(); // contiendra les 10 banques choisies
 		ArrayList<CompteBancaire> comptesSuspectes = new ArrayList<CompteBancaire>(); // contiendra les 20 comptes suspectes
@@ -188,7 +215,7 @@ public class Jeu
 			}
 		}
 		
-		/* Selectionner aléatoirement deux comptes suspectes pour chaque banque */
+		/* Selectionne aléatoirement deux comptes suspectes pour chaque banque */
 		int alea;
 		i=0;
 		
@@ -204,12 +231,16 @@ public class Jeu
 			}
 		}
 		
-		/* Generer les transactions suspectes */
+		/* Genere les transactions suspectes */
 		for(i=0;i<10;i++)
 		{
 			int montant= (int)(Math.random()*(comptesSuspectes.get(i).solde-1)+1);
 			registre.suspects.add(new Transaction(comptesSuspectes.get(i),comptesSuspectes.get(19-i),montant));
-			System.out.println(registre.suspects.get(i)); //Affichage de la liste des transactions suspectes
+			
+		/* Affichage de la liste des transactions suspectes */
+			System.out.println((i+1)+"\t"+registre.suspects.get(i)); 
 		}
+		System.out.println("");
+		System.out.println("A vous de jouer ! Choisissez le numero de la transaction sur laquelle vous souhaitez enqueter :");
 	}	
 }

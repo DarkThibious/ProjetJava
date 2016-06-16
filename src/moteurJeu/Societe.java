@@ -1,9 +1,16 @@
 package moteurJeu;
 
+/** Société est la classe représentant une société
+ * @author yasmine
+ *
+ */
 public class Societe extends Proprietaire implements Propriete
 {
 	Proprietaire possesseur;
 	
+	/** Constructeur par default de la classe societe.
+	 * 
+	 */
 	public Societe(){}
 	
 	public Societe(String nom, Pays rési, Proprietaire own, Banque bank, int solde) 

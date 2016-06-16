@@ -1,5 +1,6 @@
 package joueurs;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -16,11 +17,37 @@ public class Joueur {
 		
 	}
 	
-	public void faireDenonciation()
-	{
-		
+	public void faireRequete(Jeu jeu)
+	{ 
+		int choix = 0;
+		boolean done = false;
+		Scanner sc = new Scanner(System.in);
+		do
+		{
+			try
+			{
+				choix = sc.nextInt();
+				if(choix > 10 || choix <1)
+				{
+					done = false;
+					System.out.println("Veuillez entrer un nombre entre 1 et 10");
+				}
+				else
+				{
+					done = true;
+				}
+			}
+			catch(InputMismatchException e)
+			{
+				System.out.println("Veuillez entrer un nombre entre 1 et 10");
+			}
+		}while(!done);
+		Transaction t= jeu.registre.suspects.get(choix-1);
 	}
 	
+	/**
+	 * @param jeu
+	 */
 	public void choisirPersonnage(Jeu jeu)
 	{
 		String nom,anniversaire;
@@ -58,7 +85,7 @@ public class Joueur {
 					done = true;
 				}
 			}
-			catch(java.lang.IndexOutOfBoundsException e)
+			catch(InputMismatchException e)
 			{
 				System.out.println("Veuillez entrer un nombre entre 1 et 10");
 			}
@@ -87,7 +114,7 @@ public class Joueur {
 					done = true;
 				}
 			}
-			catch(java.lang.IndexOutOfBoundsException e)
+			catch(InputMismatchException e)
 			{
 				System.out.println("Veuillez entrer un nombre entre 1 et 20");
 			}
@@ -102,6 +129,10 @@ public class Joueur {
 		return s;
 	}
 	
+	/**
+	 * @param jeu
+	 * @param joueurs
+	 */
 	public static void initialiserJoueurs(Jeu jeu,ArrayList<Joueur> joueurs)
 	{
 		int nbJoueurs = 0,i;
@@ -135,12 +166,29 @@ public class Joueur {
 			System.out.println("Ah ? Bon, au revoir alors...");
 			System.exit(0);
 		}
+		
 		for(i=0 ; i<nbJoueurs ; i++)
 		{
 			System.out.println("Joueur "+(i+1));
 			Joueur j = new Joueur();
+			joueurs.add(j);
 			j.choisirPersonnage(jeu);
-			System.out.println(j);
+		}
+		if(nbJoueurs==1)
+		{
+			System.out.println("");
+			System.out.println("Voici le récapitulatif du joueur crée : ");
+		}
+		if(nbJoueurs > 1)
+		{
+			System.out.println("");
+			System.out.println("Voici le récapitulatif des joueurs crées : ");
+		}
+		i=0;
+		for(Joueur j : joueurs)
+		{
+			i++;
+			System.out.println("Joueur " + i +" : "+ j);
 		}
 		
 	}
@@ -149,15 +197,12 @@ public class Joueur {
 		Jeu jeu = new Jeu();
 		ArrayList<Joueur> joueurs = new ArrayList<Joueur>();
 		
+		System.out.println("Offshore game");
 		jeu.initPays();
 		jeu.initContribuables();
+		initialiserJoueurs(jeu,joueurs);
 		jeu.initSociete();
 		jeu.genereTransactionsSuspectes();
-		initialiserJoueurs(jeu,joueurs);
-		/*
-		Joueur j = new Joueur();
-		j.choisirPersonnage(jeu);
-		System.out.println(j);
-		*/	
+
 	}
 }
