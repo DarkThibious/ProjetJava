@@ -22,7 +22,7 @@ public class Requete
 	{
 		this.demandeur = demandeur;
 		this.possesseur = demande;
-		this.nbJours = coop + (int) Math.random()*10;
+		this.nbJours = coop + (int) Math.random()*5;
 		this.possede = new ArrayList<Propriete>();
 		for(Societe s : this.possesseur.possessions)
 		{

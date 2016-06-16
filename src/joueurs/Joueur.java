@@ -43,6 +43,7 @@ public class Joueur {
 			}
 		}while(!done);
 		Transaction t= jeu.registre.suspects.get(choix-1);
+		
 	}
 	
 	/**
