@@ -7,6 +7,13 @@ public class Banque extends Societe
 	ArrayList<CompteBancaire> comptes;
 	int banqueNum;
 	
+	/**
+	 * @param nom
+	 * @param rési
+	 * @param own
+	 * @param jeu
+	 * @param solde
+	 */
 	public Banque(String nom, Pays rési, Proprietaire own, Jeu jeu, int solde)
 	{
 		this.nom = nom;

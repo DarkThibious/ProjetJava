@@ -1,17 +1,16 @@
 package joueurs;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import sun.org.mozilla.javascript.tools.shell.QuitAction;
-
 import moteurJeu.*;
 
-public class Joueur {
+public class Joueur 
+{
 	public Enqueteur enqueteur;
-
+	public ArrayList<ArbrePossessions[]> infos;
+	
 	public Joueur()
 	{
 		
@@ -19,13 +18,19 @@ public class Joueur {
 	
 	public void faireRequete(Jeu jeu)
 	{ 
-		String choix = null;
+		int choix;
 		boolean done = false;
 		System.out.println("Veuillez choisir le compte sur lequel vous voulez enqueter");
 		Scanner sc = new Scanner(System.in);
-		choix = sc.next();
-	
-	//	Transaction t= jeu.registre.suspects.get(choix-1);
+		choix = sc.nextInt();
+		/* en gros choisir un arbre puis choisir un coté, avec des ints,  
+		 * if contenu.class = compte, choix d'une banque, sinon choix haut/bas, 
+		 * (si on veut les propriétés ou le propriétaire) puis pays
+		 * new Requete(this.enqueteur, (Proprietaire) arbreChoisi.contenu, jeu.tableCoop[this.enqueteur.résidence][paysDemande](ou 1 si banque))
+		 * OU new Requete(this.enqueteur, (Propriete) arbreChoisi.contenu, jeu.tableCoop[this.enqueteur.résidence][paysDemande]
+		 * */
+		
+		
 		System.out.println("");
 		
 	}
@@ -108,10 +113,28 @@ public class Joueur {
 		this.enqueteur = new Enqueteur(nom, pays, anniversaire, banque, 0);
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	public String toString()
 	{
 		String s = this.enqueteur.toString();
 		return s;
+	}
+	
+	public static void initInfos(Jeu jeu, ArrayList<Joueur> joueurs)
+	{
+		for(Joueur j : joueurs)
+		{
+			j.infos = new ArrayList<ArbrePossessions[]>();
+			for(Transaction t : jeu.registre.suspects)
+			{
+				ArbrePossessions[] a = new ArbrePossessions[2];
+				a[0] = new ArbrePossessions(t.source);
+				a[1] = new ArbrePossessions(t.destination);
+				j.infos.add(a);
+			}
+		}
 	}
 	
 	/**

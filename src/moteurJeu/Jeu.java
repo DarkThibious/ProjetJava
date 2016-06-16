@@ -242,4 +242,16 @@ public class Jeu
 		}
 		System.out.println("");
 	}	
+	
+	public CompteBancaire getCompteBancaire(int numCompte) throws ArrayIndexOutOfBoundsException
+	{
+		for(Banque b : banques)
+		{
+			if(b.banqueNum == (int)numCompte/100)
+			{
+				return b.comptes.get(numCompte%100);
+			}
+		}
+		throw new ArrayIndexOutOfBoundsException();
+	}
 }
