@@ -19,30 +19,14 @@ public class Joueur {
 	
 	public void faireRequete(Jeu jeu)
 	{ 
-		int choix = 0;
+		String choix = null;
 		boolean done = false;
+		System.out.println("Veuillez choisir le compte sur lequel vous voulez enqueter");
 		Scanner sc = new Scanner(System.in);
-		do
-		{
-			try
-			{
-				choix = sc.nextInt();
-				if(choix > 10 || choix <1)
-				{
-					done = false;
-					System.out.println("Veuillez entrer un nombre entre 1 et 10");
-				}
-				else
-				{
-					done = true;
-				}
-			}
-			catch(InputMismatchException e)
-			{
-				System.out.println("Veuillez entrer un nombre entre 1 et 10");
-			}
-		}while(!done);
-		Transaction t= jeu.registre.suspects.get(choix-1);
+		choix = sc.next();
+	
+	//	Transaction t= jeu.registre.suspects.get(choix-1);
+		System.out.println("");
 		
 	}
 	

@@ -241,6 +241,5 @@ public class Jeu
 			System.out.println((i+1)+"\t"+registre.suspects.get(i)); 
 		}
 		System.out.println("");
-		System.out.println("A vous de jouer ! Choisissez le numero de la transaction sur laquelle vous souhaitez enqueter :");
 	}	
 }
