@@ -1,11 +1,20 @@
 package joueurs;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.Properties;
 import java.util.Scanner;
 
 import moteurJeu.*;
 
+/**Joueur est la classe ...
+ * @author yasmine
+ *
+ */
 public class Joueur 
 {
 	public Enqueteur enqueteur;
@@ -16,11 +25,14 @@ public class Joueur
 		
 	}
 	
+	/**
+	 * @param jeu
+	 */
 	public void faireRequete(Jeu jeu)
 	{ 
 		int choix;
 		boolean done = false;
-		System.out.println("Veuillez choisir le compte sur lequel vous voulez enqueter");
+		System.out.println("Veuillez choisir le compte sur lequel vous voulez enqueter :");
 		Scanner sc = new Scanner(System.in);
 		choix = sc.nextInt();
 		/* en gros choisir un arbre puis choisir un coté, avec des ints,  
@@ -122,6 +134,10 @@ public class Joueur
 		return s;
 	}
 	
+	/**
+	 * @param jeu
+	 * @param joueurs
+	 */
 	public static void initInfos(Jeu jeu, ArrayList<Joueur> joueurs)
 	{
 		for(Joueur j : joueurs)
@@ -185,7 +201,7 @@ public class Joueur
 		if(nbJoueurs==1)
 		{
 			System.out.println("");
-			System.out.println("Voici le récapitulatif du joueur crée : ");
+			System.out.println("Voici le récapitulatif du joueur crée :");
 		}
 		if(nbJoueurs > 1)
 		{
@@ -211,6 +227,27 @@ public class Joueur
 		initialiserJoueurs(jeu,joueurs);
 		jeu.initSociete();
 		jeu.genereTransactionsSuspectes();
+		 int nbJoueurs = 0;
+		 int nbTourJoueurs = 0;
+		try
+		{
+			InputStream stIn = new FileInputStream("test.properties");
+			Properties myProp = new Properties();
+			myProp.load(stIn);
+			nbJoueurs = Integer.parseInt(myProp.getProperty("nbJoueurs"));
+			nbTourJoueurs = Integer.parseInt(myProp.getProperty("nbTourJoueurs"));
+			stIn.close();
+		}
+		catch (FileNotFoundException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("fichier non trouvé");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("nbJoueurs "+nbJoueurs+"nbTour "+nbTourJoueurs);
 
 	}
 }

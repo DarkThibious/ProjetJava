@@ -123,7 +123,8 @@ public class Jeu
 				"Select Line Corporation","Maruti","Vault Tech","Keysight Technologies","Egar'Tech","One Republic","Flander's Company",
 				"The Daily Planet", "ACME", "Krusty Burger","Duff","Sacre Coeur","Centre nucleaire de M. Burns","International Banana Company"
 				,"Boucherie Sanzot","Cyber Panda", "Czerka Corporation", "Cantina de Mos Esley", "Moe's","Chez Watto","Matina","Safina"
-				,"Tapidor","Nedjma","Djezzy"};
+				,"Tapidor","Nedjma","Djezzy","Amani","Cosider","Naftal","Sonelgaz",
+				"Biopharm","Elsecom"};
 		
 		while (i<5)
 		{
@@ -254,4 +255,6 @@ public class Jeu
 		}
 		throw new ArrayIndexOutOfBoundsException();
 	}
+	
+	
 }

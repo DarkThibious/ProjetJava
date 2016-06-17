@@ -2,6 +2,10 @@ package moteurJeu;
 
 import java.util.ArrayList;
 
+/**
+ * @author yasmine
+ *
+ */
 public class RegistreCentral {
 	public ArrayList<Transaction> suspects; // contiendra la liste des transactions suspectes
 
