@@ -76,7 +76,6 @@ public class Joueur
 			try
 			{
 				choix = sc.nextInt();
-				pays = jeu.pays.get(choix-1);
 				if(choix > 10 || choix <1)
 				{
 					done = false;
@@ -92,6 +91,7 @@ public class Joueur
 				System.out.println("Veuillez entrer un nombre entre 1 et 10");
 			}
 		}while(!done);
+		pays = jeu.pays.get(choix-1);
 		System.out.println("Entrez votre date de naissance : ");
 		anniversaire = sc.next();
 		System.out.println("Choisissez une banque : ");
@@ -138,7 +138,7 @@ public class Joueur
 	 * @param jeu
 	 * @param joueurs
 	 */
-	public static void initInfos(Jeu jeu, ArrayList<Joueur> joueurs)
+	public static void initInfos(Jeu jeu, Joueur[] joueurs)
 	{
 		for(Joueur j : joueurs)
 		{
@@ -157,46 +157,15 @@ public class Joueur
 	 * @param jeu
 	 * @param joueurs
 	 */
-	public static void initialiserJoueurs(Jeu jeu,ArrayList<Joueur> joueurs)
+	public static void initialiserJoueurs(Jeu jeu, Joueur[] joueurs, int nbJoueurs)
 	{
-		int nbJoueurs = 0,i;
-		System.out.println("Entrez le nombre de joueurs (Maximum 3) : ");
-		boolean done = false;
-		do
-		{
-			try
-			{
-				Scanner sc = new Scanner(System.in);
-				nbJoueurs = sc.nextInt();
-				if(nbJoueurs > 3)
-				{
-					done = false;
-					System.out.println("... 3 joueurs MAX, GRRRRRR");
-				}
-				else
-				{
-					done = true;
-				}
-				
-			}
-			catch(InputMismatchException e)
-			{
-				System.out.println("Veuillez entrer un nombre");
-			}
-			
-		}while(!done);
-		if(nbJoueurs == 0)
-		{
-			System.out.println("Ah ? Bon, au revoir alors...");
-			System.exit(0);
-		}
+		int i;
 		
 		for(i=0 ; i<nbJoueurs ; i++)
 		{
 			System.out.println("Joueur "+(i+1));
-			Joueur j = new Joueur();
-			joueurs.add(j);
-			j.choisirPersonnage(jeu);
+			joueurs[i] = new Joueur();
+			joueurs[i].choisirPersonnage(jeu);
 		}
 		if(nbJoueurs==1)
 		{
@@ -219,16 +188,15 @@ public class Joueur
 	public static void main(String[] args) 
 	{
 		Jeu jeu = new Jeu();
-		ArrayList<Joueur> joueurs = new ArrayList<Joueur>();
+		Joueur joueurs[];
+		int nbJoueurs = 0;
+		int nbTourJoueurs = 0;
+		
 		
 		System.out.println("Offshore game");
 		jeu.initPays();
 		jeu.initContribuables();
-		initialiserJoueurs(jeu,joueurs);
-		jeu.initSociete();
-		jeu.genereTransactionsSuspectes();
-		 int nbJoueurs = 0;
-		 int nbTourJoueurs = 0;
+		//initJoueurs
 		try
 		{
 			InputStream stIn = new FileInputStream("test.properties");
@@ -242,12 +210,16 @@ public class Joueur
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("fichier non trouvé");
+			System.out.println("Fichier non trouvé");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		joueurs = new Joueur[nbJoueurs];
+		
 		System.out.println("nbJoueurs "+nbJoueurs+"nbTour "+nbTourJoueurs);
-
+		initialiserJoueurs(jeu,joueurs, nbJoueurs);
+		jeu.initSociete();
+		jeu.genereTransactionsSuspectes();
 	}
 }
