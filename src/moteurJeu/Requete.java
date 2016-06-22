@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 public class Requete 
 {
-	Enqueteur demandeur;
-	ArrayList<Propriete> possede;
-	Proprietaire possesseur;
-	int nbJours;
+	public Enqueteur demandeur;
+	public ArrayList<Propriete> possede;
+	public Proprietaire possesseur;
+	public int nbJours;
 	
 	public Requete(Enqueteur demandeur, Propriete demande, int coop)
 	{

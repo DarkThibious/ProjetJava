@@ -155,18 +155,6 @@ public class Jeu
 		{
 			creerSocieteAlea(nomsSocietes[i], contribuablesPS, this);
 		}
-		/*
-		for(Contribuable c : contribuablesPS)
-		{
-			System.out.println(c);
-			System.out.println("");
-		}
-		for(Banque b : banques)
-		{
-			System.out.println(b);
-			System.out.println("");
-		}
-		*/
 	}
 	
 	/** Crée les sociétés aléatoirement
