@@ -55,7 +55,7 @@ public class Joueur
 		int choix = 0;
 		boolean done = false;
 		Pays pays = null;
-		int i=0;
+		int i=1;
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Choisissez un pays : ");
 		for(Pays p : jeu.pays)
@@ -91,7 +91,7 @@ public class Joueur
 		return pays;	
 	}
 	
-	public Banque choisirBanque(Jeu jeu)
+	public static Banque choisirBanque(Jeu jeu)
 	{
 		Banque banque = null;
 		int i,choix = 0;
@@ -150,18 +150,73 @@ public class Joueur
 		
 	}
 	
-	public void nouvelleRequete(Jeu jeu, Joueur[] joueurs)
+	/** Propose à l'utilisateur la liste des actions qu'il peut effectuer pour qu'il choisisse ce qu'il veut faire
+	 * @param jeu
+	 * 			Partie de jeu
+	 * @param joueurs
+	 * 			Les 3 joueurs humains
+	 */
+	public static void nouvelleRequete(Jeu jeu, Joueur[] joueurs)
 	{
-		int i;
+		int i,choix = 0;
+		boolean done = false;
 		for(i=0;i<joueurs.length;i++)
 		{
 			System.out.println("Joueur "+(i+1));
-			System.out.println("Voici la liste d'actions que vous pouvez effectuer (tapez le numero de l'action que vous voulez effectuer " +
-					"\n 1. Denoncer contribuable à pays \n " +
+			System.out.println("Voici la liste d'actions que vous pouvez effectuer(tapez le numero de l'action que vous voulez effectuer) \n " +
+					"1. Denoncer contribuable à pays \n " +
 					"2. Demander à un enquêteur qui possède une société particulière \n " +
 					"3. Demander à un enquêteur quelles sociétés sont detenues par une société ou un contribuable\n " +
 					"4. Demander à une banque quelle est la société ou le contribuable deteneur d'un compte bancaire particulier ");
-
+			Scanner sc = new Scanner(System.in);
+			do
+			{
+				try
+				{
+					choix = sc.nextInt();
+					if(choix > 4 || choix <1)
+					{
+						done = false;
+						System.out.println("Veuillez entrer un nombre entre 1 et 4");
+					}
+					else
+					{
+						done = true;
+					}
+				}
+				catch(InputMismatchException e)
+				{
+					System.out.println("Veuillez entrer un nombre entre 1 et 4");
+					sc.next();
+				}
+			}while(!done);
+			
+			switch (choix)
+			{
+				case 1: System.out.println("choix= "+ 1); break;
+				case 2: System.out.println("choix= "+ 2); break;
+				case 3: System.out.println("choix= "+ 3); break;
+				case 4: 
+					System.out.println("choix= "+ 4); 
+					Banque banque = choisirBanque(jeu);
+					//System.out.println("vous avez choisi la banque"+ banque.nom);
+					System.out.println("Entrez le numero de compte dont vous voulez recuperer le deteneur");
+					int numCompte = sc.nextInt();
+					i=0;
+					// verifier que le numero de compte qu'il cherche existe dans la liste des transactions suspectes
+					while(i<jeu.registre.suspects.size())
+					{
+						if(numCompte != jeu.registre.suspects.get(i).source.numero)
+						{
+							System.out.println("Saisie fausse! Entrez le numero de compte dont vous voulez recuperer le deteneu");
+						}				
+						i+=1;
+					}
+					
+					break;
+					
+			}
+				
 		}
 	}
 	public String toString()
@@ -261,5 +316,6 @@ public class Joueur
 		initialiserJoueurs(jeu,joueurs);
 		jeu.initSociete();
 		jeu.genereTransactionsSuspectes();
+		nouvelleRequete(jeu,joueurs);
 	}
 }
