@@ -258,10 +258,23 @@ public class Joueur
 		demande = sc.next();
 		done = false;
 		// Verifier que la societe qu'il a saisi figure bien dans la liste des societes
-		if(getSociete(jeu,demande) != null)
+		Societe societeEnquete;
+		do
 		{
-			//appeller le constructeur de societe
-		}
+			societeEnquete = getSociete(jeu,demande) ;
+			if(societeEnquete!= null)
+			{
+				done = true;
+			}
+			else 
+			{
+				done = false;
+				System.out.println("Choisissez la societe sur laquelle vous enquetez");
+				demande = sc.next();
+				
+			}
+		}while(!done);
+		//appeller le constructeur de requete avec societeEnquete
 	}
 	/** Prend en parametre le jeu et un nom de societe si ce nom figure dans la liste des societes retourner l'objet sinon retourner null
 	 * @param jeu
