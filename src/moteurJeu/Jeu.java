@@ -13,6 +13,7 @@ public class Jeu
 	public ArrayList<Banque> banques;
 	public ArrayList<Pays> pays;
 	public RegistreCentral registre;
+	public ArrayList<Societe> societes;
 	
 	/** Contructeur de la classe jeu
 	 * 
@@ -23,6 +24,7 @@ public class Jeu
 		this.pays = new ArrayList<Pays>();
 		this.banques = new ArrayList<Banque>();
 		this.registre = new RegistreCentral();
+		this.societes = new ArrayList<Societe>();
 	}
 	
 	/** Initialise la liste des pays.
@@ -181,7 +183,7 @@ public class Jeu
 				p = p.possessions.get(o);
 			}
 		}
-		new Societe(nom, jeu.pays.get(r.nextInt(jeu.pays.size())), p, jeu.banques.get(r.nextInt(jeu.banques.size())), r.nextInt(1000000000));
+		this.societes.add(new Societe(nom, jeu.pays.get(r.nextInt(jeu.pays.size())), p, jeu.banques.get(r.nextInt(jeu.banques.size())), r.nextInt(1000000000)));
 	}
 	
 	/**  Genere aléatoirement la liste des transactions suspectes

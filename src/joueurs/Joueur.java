@@ -228,7 +228,58 @@ public class Joueur
 		return societe.getProprietaire();
 		
 	}
-	
+	public void option2(Jeu jeu)
+	{
+		String demande;
+		System.out.println("Vous pouvez demander à un pays qui est le deteneur d'une societe");
+		System.out.println("Choisissez le pays");
+		Scanner sc = new Scanner(System.in);
+		demande = sc.next();
+		boolean done = false;
+		// Verifier que le pays qu'il a saisi figure bien dans la liste des pays
+		do
+		{
+			for(Pays p : jeu.pays)
+			{
+				if(p.nom.equals(demande))
+				{
+					done = true;
+				}
+				else
+				{
+					done = false;
+					System.out.println("Choisissez le pays");
+					demande = sc.next();
+				}
+			}
+			
+		}while(!done);
+		System.out.println("Choisissez la societe sur laquelle vous enquetez");
+		demande = sc.next();
+		done = false;
+		// Verifier que la societe qu'il a saisi figure bien dans la liste des societes
+		if(getSociete(jeu,demande) != null)
+		{
+			//appeller le constructeur de societe
+		}
+	}
+	/** Prend en parametre le jeu et un nom de societe si ce nom figure dans la liste des societes retourner l'objet sinon retourner null
+	 * @param jeu
+	 * @param nomSociete
+	 * @return
+	 */
+	public static Societe getSociete(Jeu jeu,String nomSociete)// throws IOException
+	{
+		for(Societe s : jeu.societes )
+		{
+			if(s.nom.equals(nomSociete))
+			{ 
+				return(s);
+			}
+		}
+		//throw new IOException();
+		return null;
+	}
 	/** Retourne la liste des proprietes d'un proprietaire
 	 * @param jeu
 	 * @param proprietaire
@@ -336,6 +387,7 @@ public class Joueur
 		jeu.initPays();
 		jeu.initContribuables();
 		//initJoueurs
+
 		recupereProprietes();
 		joueurs = new Joueur[nbJoueurs];
 		initialiserJoueurs(jeu,joueurs);
