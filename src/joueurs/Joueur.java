@@ -261,14 +261,13 @@ public class Joueur
 				if(p.nom.equals(demande))
 				{
 					done = true;
-				}
-				else
-				{
-					done = false;
-					System.out.println("Choisissez le pays");
-					demande = sc.next();
+					break;
 				}
 			}
+			if(done) break;
+			done = false;
+			System.out.println("Choisissez le pays");
+			demande = sc.next();
 			
 		}while(!done);
 		System.out.println("Choisissez la societe sur laquelle vous enquetez");
@@ -327,20 +326,20 @@ public class Joueur
 				if(p.nom.equals(demande))
 				{
 					done = true;
-				}
-				else
-				{
-					done = false;
-					System.out.println("Choisissez le pays");
-					demande = sc.next();
+					break;
 				}
 			}
+			if(done) break;
+			done = false;
+			System.out.println("Choisissez le pays");
+			demande = sc.next();
 		}while(!done);
 		System.out.println("Choisissez le proprietaire sur laquel vous voulez enqueter");
 		done = false;
 		// Verifier que le proprietaire qu'il a saisi figure bien dans la liste des proprietaire
 		Societe societeEnquete;
 		Contribuable contribuableEnquete;
+		demande = sc.next();
 		do
 		{
 			societeEnquete = getSociete(jeu,demande) ;
