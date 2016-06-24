@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 import moteurJeu.*;
 
-/** Joueur est la classe de jeu
+/** Joueur est la classe de la partie de jeu
  * @author yasmine
  *
  */
@@ -24,11 +24,20 @@ public class Joueur
 	public static int nbComptesSuspects;
 	public static int playing;
 	
+	/** Constructeur par defaut de la classe Joueur
+	 * 
+	 */
 	public Joueur()
 	{
 		
 	}
 	
+	/** Affiche à la console la liste des pays et demande à l'utilisateur d'en choisir un et renvoie son objet correspondant
+	 * @param jeu
+	 * 			partie de jeu
+	 * @return
+	 * 		 	le pays que l'utilisateur a choisi
+	 */
 	public static Pays choisirPays(Jeu jeu)
 	{
 		int choix = 0;
@@ -70,6 +79,12 @@ public class Joueur
 		return pays;	
 	}
 	
+	/** Affiche à la console la liste des banques et demande à l'utilisateur d'en choisir un et renvoie son objet correspondant
+	 * @param jeu
+	 * 			partie de jeu
+	 * @return	
+	 * 			la banque que l'utilisateur a choisi
+	 */
 	public static Banque choisirBanque(Jeu jeu)
 	{
 		Banque banque = null;
@@ -123,6 +138,9 @@ public class Joueur
 		this.enqueteur = new Enqueteur(nom, choisirPays(jeu), anniversaire, choisirBanque(jeu), 0);	
 	}
 	
+	/** Met à jour l'arbre de possessions
+	 * 
+	 */
 	public void updateArbre()
 	{
 		
@@ -179,6 +197,12 @@ public class Joueur
 		}
 	}
 
+	/** Permet à l'utilisateur d'enregistrer l'option 4
+	 * @param jeu
+	 * 			partie de jeu
+	 * @param joueur
+	 * 			l'utilisateur qui interagit avec la console
+	 */
 	public static void option4(Jeu jeu, Joueur joueur)
 	{
 		int i;
@@ -211,8 +235,11 @@ public class Joueur
 			
 		}while(!done);	
 	}
-	/**
+	/** Permet à l'utilisateur d'enregistrer l'option 2
 	 * @param jeu
+	 * 			partie de jeu
+	 * @param joueur
+	 * 			l'utilisateur qui interagit avec la console
 	 */
 	public static void option2(Jeu jeu, Joueur joueur)
 	{
@@ -248,7 +275,7 @@ public class Joueur
 	 * @param nomSociete
 	 * @return
 	 */
-	public static Societe getSociete(Jeu jeu,String nomSociete)// throws IOException
+	public static Societe getSociete(Jeu jeu,String nomSociete)
 	{
 		for(Societe s : jeu.societes )
 		{
@@ -257,10 +284,14 @@ public class Joueur
 				return(s);
 			}
 		}
-		//throw new IOException();
 		return null;
 	}
-
+	/** Permet à l'utilisateur d'enregistrer l'option 3
+	 * @param jeu
+	 * 			partie de jeu
+	 * @param joueur
+	 * 			l'utilisateur qui interagit avec la console
+	 */
 	public static void option3(Jeu jeu, Joueur joueur)
 	{
 		String demande;
@@ -335,7 +366,7 @@ public class Joueur
 		return s;
 	}
 	
-	/**
+	/** Initilise l'arbre des possessions
 	 * @param jeu
 	 * 			partie de jeu
 	 * @param joueurs
@@ -382,7 +413,7 @@ public class Joueur
 			System.out.println("Joueur " + i +" : "+ j);
 		}
 	}
-	/** Initialise les proprietes du jeu à partir du fichier 
+	/** Initialise les proprietes du jeu à partir du fichier de proprietes
 	 * 
 	 */
 	public static void recupereProprietes()
@@ -408,7 +439,7 @@ public class Joueur
 		}
 		
 	}
-	/**
+	/** Programme principal
 	 * @param args
 	 */
 	public static void main(String[] args) 

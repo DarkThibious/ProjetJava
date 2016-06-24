@@ -2,6 +2,10 @@ package moteurJeu;
 
 import java.util.ArrayList;
 
+/** Classe representant la banque
+ * @author yasmine
+ *
+ */
 public class Banque extends Societe 
 {
 	ArrayList<CompteBancaire> comptes;
@@ -29,6 +33,10 @@ public class Banque extends Societe
 		this.requetes = new ArrayList<Requete>();
 	}
 	
+	/** Cree une nouvelle requete
+	 * @param demandeur
+	 * @param demande
+	 */
 	public void nouvelleRequete(Enqueteur demandeur, CompteBancaire demande)
 	{
 		if(demande.hebergeur == this)

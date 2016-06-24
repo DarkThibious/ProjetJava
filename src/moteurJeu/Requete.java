@@ -2,6 +2,10 @@ package moteurJeu;
 
 import java.util.ArrayList;
 
+/** CLasse representant une requete
+ * @author yasmine
+ *
+ */
 public class Requete 
 {
 	public Enqueteur demandeur;
@@ -10,6 +14,11 @@ public class Requete
 	public Proprietaire possesseur;
 	public int nbJours;
 	
+	/** constructeur
+	 * @param demandeur
+	 * @param demande
+	 * @param coop
+	 */
 	public Requete(Enqueteur demandeur, Propriete demande, int coop)
 	{
 		this.demandeur = demandeur;

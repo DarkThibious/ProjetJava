@@ -36,7 +36,7 @@ public class Pays
 		this.enqueteur = enqueteur;
 	}
 	
-	/** 
+	/** Taite les requetes , met à jour le nombre de jours
 	 * 
 	 */
 	public void traiteRequete() 
