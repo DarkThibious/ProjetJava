@@ -127,7 +127,6 @@ public class Joueur
 		}while(!done);
 		banque = jeu.banques.get(choix-1);
 		return banque;
-		
 	}
 	/** Demande à l'utilisateur d'entrer les informations relatives aux joueurs
 	 * @param jeu 
@@ -193,28 +192,10 @@ public class Joueur
 			
 			switch (choix)
 			{
-				case 1: System.out.println("choix= "+ 1); break;
-				case 2: System.out.println("choix= "+ 2); break;
-				case 3: System.out.println("choix= "+ 3); break;
-				case 4: 
-					System.out.println("choix= "+ 4); 
-					Banque banque = choisirBanque(jeu);
-					//System.out.println("vous avez choisi la banque"+ banque.nom);
-					System.out.println("Entrez le numero de compte dont vous voulez recuperer le deteneur");
-					int numCompte = sc.nextInt();
-					i=0;
-					// verifier que le numero de compte qu'il cherche existe dans la liste des transactions suspectes
-					while(i<jeu.registre.suspects.size())
-					{
-						if(numCompte != jeu.registre.suspects.get(i).source.numero)
-						{
-							System.out.println("Saisie fausse! Entrez le numero de compte dont vous voulez recuperer le deteneu");
-						}				
-						i+=1;
-					}
-					
-					break;
-					
+				case 1: break;
+				case 2: option2(jeu);break;
+				case 3: option3(jeu);break;
+				case 4: option4(jeu);break;
 			}
 				
 		}
@@ -228,10 +209,38 @@ public class Joueur
 		return societe.getProprietaire();
 		
 	}
+	public static void option4(Jeu jeu)
+	{
+		int i;
+		boolean done = false;
+		Scanner sc = new Scanner(System.in);
+		Banque banque = choisirBanque(jeu);
+		System.out.println("Entrez le numero de compte dont vous voulez recuperer le deteneur");
+		int numCompte = sc.nextInt();
+		i=0;
+		// verifier que le numero de compte qu'il cherche existe dans la liste des transactions suspectes
+		do
+		{
+			System.out.println("Entrez le numero de compte dont vous voulez recuperer le deteneur");
+			for(Transaction t : jeu.registre.suspects)
+			{
+				if(numCompte == t.source.numero)
+				{
+					done = true;
+					// appeler le constructeur de requete avec ce compte
+				}
+				else 
+				{
+					done = false;
+				}
+			}
+			
+		}while(!done);
+	}
 	/**
 	 * @param jeu
 	 */
-	public void option2(Jeu jeu)
+	public static void option2(Jeu jeu)
 	{
 		String demande;
 		System.out.println("Vous pouvez demander à un pays qui est le deteneur d'une societe");
@@ -297,7 +306,7 @@ public class Joueur
 		return null;
 	}
 	
-	public void option3(Jeu jeu)
+	public static void option3(Jeu jeu)
 	{
 		String demande;
 		System.out.println("Vous pouvez demander à un pays quelles sont les proprietes d'une societe ou d'un contribuable");
