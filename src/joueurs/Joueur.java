@@ -228,6 +228,9 @@ public class Joueur
 		return societe.getProprietaire();
 		
 	}
+	/**
+	 * @param jeu
+	 */
 	public void option2(Jeu jeu)
 	{
 		String demande;
@@ -293,6 +296,81 @@ public class Joueur
 		//throw new IOException();
 		return null;
 	}
+	
+	public void option3(Jeu jeu)
+	{
+		String demande;
+		System.out.println("Vous pouvez demander à un pays quelles sont les proprietes d'une societe ou d'un contribuable");
+		System.out.println("Choisissez le pays");
+		Scanner sc = new Scanner(System.in);
+		demande = sc.next();
+		boolean done = false;
+		// Verifier que le pays qu'il a saisi figure bien dans la liste des pays
+		do
+		{
+			for(Pays p : jeu.pays)
+			{
+				if(p.nom.equals(demande))
+				{
+					done = true;
+				}
+				else
+				{
+					done = false;
+					System.out.println("Choisissez le pays");
+					demande = sc.next();
+				}
+			}
+		}while(!done);
+		System.out.println("Choisissez le proprietaire sur laquel vous voulez enqueter");
+		done = false;
+		// Verifier que le proprietaire qu'il a saisi figure bien dans la liste des proprietaire
+		Societe societeEnquete;
+		Contribuable contribuableEnquete;
+		do
+		{
+			societeEnquete = getSociete(jeu,demande) ;
+			contribuableEnquete = getContribuable(jeu,demande);
+			if(societeEnquete!= null)
+			{
+				done = true;
+				//appeler le constructeur de la requeter avec la societe
+			}
+			else if(contribuableEnquete != null)
+			{
+				done = true;
+				//appeler le constructeur de la requeter avec la societe
+			}
+			else 
+			{
+				done = false;
+				System.out.println("Choisissez la societe sur laquelle vous voulez enqueter");
+				demande = sc.next();	
+			}
+			
+		}while(!done);
+	}
+	/** Prend en parametre le jeu et un nom de contribuable si ce nom figure dans la liste des contribuables retourner l'objet sinon retourner null
+	 * @param jeu
+	 * @param nomContribuable
+	 * @return
+	 */
+	public static Contribuable getContribuable(Jeu jeu,String nomContribuable)// throws IOException
+	{
+		for(Pays p : jeu.pays )
+		{
+			for(Contribuable c : p.contribuables)
+			{
+				if(c.nom.equals(nomContribuable))
+				{ 
+					return(c);
+				}
+			}
+		}
+		//throw new IOException();
+		return null;
+	}
+	
 	/** Retourne la liste des proprietes d'un proprietaire
 	 * @param jeu
 	 * @param proprietaire
