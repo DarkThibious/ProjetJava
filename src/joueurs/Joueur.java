@@ -219,6 +219,31 @@ public class Joueur
 				
 		}
 	}
+	
+	/** Demander à un pays qui est le deteneur d'une societe
+	 * @param jeu
+	 */
+	public Proprietaire demanderDeteneurSociete(Jeu jeu, Pays pays, Societe societe)
+	{
+		return societe.getProprietaire();
+		
+	}
+	
+	/** Retourne la liste des proprietes d'un proprietaire
+	 * @param jeu
+	 * @param proprietaire
+	 * @return
+	 */
+	public ArrayList<Propriete> demanderProprietesProprietaire(Jeu jeu, Proprietaire proprietaire)
+	{
+		ArrayList<Propriete> possessionsProprietaire = new ArrayList<Propriete>();
+		for(Propriete p : proprietaire.possessions)
+		{
+			possessionsProprietaire.add(p);
+		}
+		return null;
+		
+	}
 	public String toString()
 	{
 		String s = this.enqueteur.toString();
