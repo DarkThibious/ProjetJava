@@ -22,6 +22,7 @@ public class Joueur
 	public static int nbJoueurs;
 	public static int nbActionsTour;
 	public static int nbComptesSuspects;
+	public static int playing;
 	
 	public Joueur()
 	{
@@ -157,11 +158,11 @@ public class Joueur
 	 */
 	public static void nouvelleRequete(Jeu jeu, Joueur[] joueurs)
 	{
-		int i,choix = 0;
+		int choix = 0;
 		boolean done = false;
-		for(i=0;i<joueurs.length;i++)
+		for(Joueur.playing=0;Joueur.playing<joueurs.length;Joueur.playing++)
 		{
-			System.out.println("Joueur "+(i+1));
+			System.out.println("Joueur "+(Joueur.playing+1));
 			System.out.println("Voici la liste d'actions que vous pouvez effectuer(tapez le numero de l'action que vous voulez effectuer) \n " +
 					"1. Denoncer contribuable à pays \n " +
 					"2. Demander à un enquêteur qui possède une société particulière \n " +
@@ -193,9 +194,9 @@ public class Joueur
 			switch (choix)
 			{
 				case 1: break;
-				case 2: option2(jeu);break;
-				case 3: option3(jeu);break;
-				case 4: option4(jeu);break;
+				case 2: option2(jeu, joueurs[playing]);break;
+				case 3: option3(jeu, joueurs[playing]);break;
+				case 4: option4(jeu, joueurs[playing]);break;
 			}
 				
 		}
@@ -207,40 +208,44 @@ public class Joueur
 	public Proprietaire demanderDeteneurSociete(Jeu jeu, Pays pays, Societe societe)
 	{
 		return societe.getProprietaire();
-		
 	}
-	public static void option4(Jeu jeu)
+
+	public static void option4(Jeu jeu, Joueur joueur)
 	{
 		int i;
 		boolean done = false;
 		Scanner sc = new Scanner(System.in);
 		Banque banque = choisirBanque(jeu);
-		System.out.println("Entrez le numero de compte dont vous voulez recuperer le deteneur");
-		int numCompte = sc.nextInt();
-		i=0;
-		// verifier que le numero de compte qu'il cherche existe dans la liste des transactions suspectes
+		CompteBancaire compte;
+		int numCompte;
+		System.out.println("Veuillez entrer le numéro de compte sur lequel vous souhaitez enqueter");
 		do
 		{
-			System.out.println("Entrez le numero de compte dont vous voulez recuperer le deteneur");
-			for(Transaction t : jeu.registre.suspects)
+			try
 			{
-				if(numCompte == t.source.numero)
+				numCompte = sc.nextInt();
+				try
 				{
-					done = true;
-					// appeler le constructeur de requete avec ce compte
+					compte = jeu.getCompteBancaire(numCompte);
+					banque.nouvelleRequete(joueur.enqueteur, compte);
+					System.out.println("Requete créée");
 				}
-				else 
+				catch(ArrayIndexOutOfBoundsException e)
 				{
-					done = false;
+					System.out.println("Ce compte n'existe pas");
 				}
 			}
+			catch(InputMismatchException e)
+			{
+				System.out.println("Veuillez entrer un numéro de compte");
+			}
 			
-		}while(!done);
+		}while(!done);	
 	}
 	/**
 	 * @param jeu
 	 */
-	public static void option2(Jeu jeu)
+	public static void option2(Jeu jeu, Joueur joueur)
 	{
 		String demande;
 		System.out.println("Vous pouvez demander à un pays qui est le deteneur d'une societe");
@@ -305,8 +310,8 @@ public class Joueur
 		//throw new IOException();
 		return null;
 	}
-	
-	public static void option3(Jeu jeu)
+
+	public static void option3(Jeu jeu, Joueur joueur)
 	{
 		String demande;
 		System.out.println("Vous pouvez demander à un pays quelles sont les proprietes d'une societe ou d'un contribuable");
@@ -379,7 +384,6 @@ public class Joueur
 		//throw new IOException();
 		return null;
 	}
-	
 	/** Retourne la liste des proprietes d'un proprietaire
 	 * @param jeu
 	 * @param proprietaire

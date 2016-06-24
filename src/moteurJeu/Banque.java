@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Banque extends Societe 
 {
 	ArrayList<CompteBancaire> comptes;
+	public ArrayList<Requete> requetes;
 	int banqueNum;
 	
 	/**
@@ -25,6 +26,19 @@ public class Banque extends Societe
 		this.banqueNum = jeu.banques.size()+((int)((Math.random()*25)+1)*100); 
 		jeu.banques.add(this);
 		this.compte = new CompteBancaire(this, this, solde);
+		this.requetes = new ArrayList<Requete>();
+	}
+	
+	public void nouvelleRequete(Enqueteur demandeur, CompteBancaire demande)
+	{
+		if(demande.hebergeur == this)
+		{
+			new Requete(demandeur, demande, 1);
+		}
+		else
+		{
+			new Requete(demandeur, (CompteBancaire) null, 1);
+		}	
 	}
 	
 	public String toString()

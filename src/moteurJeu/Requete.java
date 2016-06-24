@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Requete 
 {
 	public Enqueteur demandeur;
+	public boolean valid;
 	public ArrayList<Propriete> possede;
 	public Proprietaire possesseur;
 	public int nbJours;
@@ -15,7 +16,14 @@ public class Requete
 		this.possede = new ArrayList<Propriete>();
 		this.possede.add(demande);
 		this.nbJours = coop + (int) Math.random()*10;
-		this.possesseur = this.possede.get(0).getProprietaire();
+		if(demande == null)
+		{
+			valid = false;
+		}
+		else
+		{
+			this.possesseur = this.possede.get(0).getProprietaire();
+		}
 	}
 	
 	public Requete(Enqueteur demandeur, Proprietaire demande, int coop)
@@ -23,13 +31,19 @@ public class Requete
 		this.demandeur = demandeur;
 		this.possesseur = demande;
 		this.nbJours = coop + (int) Math.random()*5;
-		this.possede = new ArrayList<Propriete>();
-		for(Societe s : this.possesseur.possessions)
+		if(demande == null)
 		{
-			this.possede.add(s);
+			valid = false;
 		}
-		this.possede.add(this.possesseur.compte);
-		
+		else
+		{
+			this.possede = new ArrayList<Propriete>();
+			for(Societe s : this.possesseur.possessions)
+			{
+				this.possede.add(s);
+			}
+			this.possede.add(this.possesseur.compte);	
+		}
 	}
 
 	@Override
