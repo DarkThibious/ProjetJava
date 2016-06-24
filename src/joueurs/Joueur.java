@@ -29,29 +29,7 @@ public class Joueur
 		
 	}
 	
-	/**
-	 * @param jeu
-	 * 			partie de jeu
-	 */
-	public void faireRequete(Jeu jeu)
-	{ 
-		int choix;
-		System.out.println("Veuillez choisir le compte sur lequel vous voulez enqueter :");
-		Scanner sc = new Scanner(System.in);
-		choix = sc.nextInt();
-		/* en gros choisir un arbre puis choisir un coté, avec des ints,  
-		 * if contenu.class = compte, choix d'une banque, sinon choix haut/bas, 
-		 * (si on veut les propriétés ou le propriétaire) puis pays
-		 * new Requete(this.enqueteur, (Proprietaire) arbreChoisi.contenu, jeu.tableCoop[this.enqueteur.résidence][paysDemande](ou 1 si banque))
-		 * OU new Requete(this.enqueteur, (Propriete) arbreChoisi.contenu, jeu.tableCoop[this.enqueteur.résidence][paysDemande]
-		 * */
-		
-		
-		System.out.println("");
-		
-	}
-	
-	public Pays choisirPays(Jeu jeu)
+	public static Pays choisirPays(Jeu jeu)
 	{
 		int choix = 0;
 		boolean done = false;
@@ -163,11 +141,11 @@ public class Joueur
 		for(Joueur.playing=0;Joueur.playing<joueurs.length;Joueur.playing++)
 		{
 			System.out.println("Joueur "+(Joueur.playing+1));
-			System.out.println("Voici la liste d'actions que vous pouvez effectuer(tapez le numero de l'action que vous voulez effectuer) \n " +
-					"1. Denoncer contribuable à pays \n " +
-					"2. Demander à un enquêteur qui possède une société particulière \n " +
-					"3. Demander à un enquêteur quelles sociétés sont detenues par une société ou un contribuable\n " +
-					"4. Demander à une banque quelle est la société ou le contribuable deteneur d'un compte bancaire particulier ");
+			System.out.println("Voici la liste d'actions que vous pouvez effectuer(tapez le numero de l'action que vous voulez effectuer)\n" +
+					"1. Denoncer contribuable à un pays\n" +
+					"2. Demander à un enquêteur qui possède une société particulière\n" +
+					"3. Demander à un enquêteur quelles sociétés sont detenues par une société ou un contribuable\n" +
+					"4. Demander à une banque quelle est la société ou le contribuable deteneur d'un compte bancaire particulier");
 			Scanner sc = new Scanner(System.in);
 			do
 			{
@@ -197,17 +175,8 @@ public class Joueur
 				case 2: option2(jeu, joueurs[playing]);break;
 				case 3: option3(jeu, joueurs[playing]);break;
 				case 4: option4(jeu, joueurs[playing]);break;
-			}
-				
+			}			
 		}
-	}
-	
-	/** Demander à un pays qui est le deteneur d'une societe
-	 * @param jeu
-	 */
-	public Proprietaire demanderDeteneurSociete(Jeu jeu, Pays pays, Societe societe)
-	{
-		return societe.getProprietaire();
 	}
 
 	public static void option4(Jeu jeu, Joueur joueur)
@@ -230,7 +199,7 @@ public class Joueur
 					banque.nouvelleRequete(joueur.enqueteur, compte);
 					System.out.println("Requete créée");
 				}
-				catch(ArrayIndexOutOfBoundsException e)
+				catch(IndexOutOfBoundsException e)
 				{
 					System.out.println("Ce compte n'existe pas");
 				}
@@ -251,34 +220,17 @@ public class Joueur
 		System.out.println("Vous pouvez demander à un pays qui est le deteneur d'une societe");
 		System.out.println("Choisissez le pays");
 		Scanner sc = new Scanner(System.in);
-		demande = sc.next();
 		boolean done = false;
-		// Verifier que le pays qu'il a saisi figure bien dans la liste des pays
-		do
-		{
-			for(Pays p : jeu.pays)
-			{
-				if(p.nom.equals(demande))
-				{
-					done = true;
-					break;
-				}
-			}
-			if(done) break;
-			done = false;
-			System.out.println("Choisissez le pays");
-			demande = sc.next();
-			
-		}while(!done);
+		Pays p = choisirPays(jeu);
 		System.out.println("Choisissez la societe sur laquelle vous enquetez");
-		demande = sc.next();
 		done = false;
 		// Verifier que la societe qu'il a saisi figure bien dans la liste des societes
 		Societe societeEnquete;
 		do
 		{
+			demande = sc.next();
 			societeEnquete = getSociete(jeu,demande) ;
-			if(societeEnquete!= null)
+			if(societeEnquete != null)
 			{
 				done = true;
 			}
@@ -286,11 +238,10 @@ public class Joueur
 			{
 				done = false;
 				System.out.println("Choisissez la societe sur laquelle vous enquetez");
-				demande = sc.next();
-				
 			}
 		}while(!done);
-		//appeller le constructeur de requete avec societeEnquete
+		p.nouvelleRequete(joueur.enqueteur, societeEnquete);
+		System.out.println("Requete créée");
 	}
 	/** Prend en parametre le jeu et un nom de societe si ce nom figure dans la liste des societes retourner l'objet sinon retourner null
 	 * @param jeu
@@ -314,54 +265,34 @@ public class Joueur
 	{
 		String demande;
 		System.out.println("Vous pouvez demander à un pays quelles sont les proprietes d'une societe ou d'un contribuable");
-		System.out.println("Choisissez le pays");
 		Scanner sc = new Scanner(System.in);
-		demande = sc.next();
 		boolean done = false;
-		// Verifier que le pays qu'il a saisi figure bien dans la liste des pays
-		do
-		{
-			for(Pays p : jeu.pays)
-			{
-				if(p.nom.equals(demande))
-				{
-					done = true;
-					break;
-				}
-			}
-			if(done) break;
-			done = false;
-			System.out.println("Choisissez le pays");
-			demande = sc.next();
-		}while(!done);
-		System.out.println("Choisissez le proprietaire sur laquel vous voulez enqueter");
+		Pays p = choisirPays(jeu);
+		System.out.println("Choisissez le proprietaire sur lequel vous voulez enqueter");
 		done = false;
 		// Verifier que le proprietaire qu'il a saisi figure bien dans la liste des proprietaire
-		Societe societeEnquete;
-		Contribuable contribuableEnquete;
-		demande = sc.next();
+		Proprietaire proprioEnquete;
 		do
 		{
-			societeEnquete = getSociete(jeu,demande) ;
-			contribuableEnquete = getContribuable(jeu,demande);
-			if(societeEnquete!= null)
+			demande = sc.next();
+			proprioEnquete = getSociete(jeu, demande) ;
+			if(proprioEnquete == null)
 			{
-				done = true;
-				//appeler le constructeur de la requeter avec la societe
+				proprioEnquete = getContribuable(jeu, demande);
 			}
-			else if(contribuableEnquete != null)
-			{
-				done = true;
-				//appeler le constructeur de la requeter avec la societe
-			}
-			else 
+			if(proprioEnquete == null)
 			{
 				done = false;
-				System.out.println("Choisissez la societe sur laquelle vous voulez enqueter");
-				demande = sc.next();	
+				System.out.println("Choisissez le proprietaire sur lequel vous voulez enqueter");
+				demande = sc.next();
 			}
-			
+			else
+			{
+				done = true;
+			}			
 		}while(!done);
+		p.nouvelleRequete(joueur.enqueteur, proprioEnquete);
+		System.out.println("Requete créée");
 	}
 	/** Prend en parametre le jeu et un nom de contribuable si ce nom figure dans la liste des contribuables retourner l'objet sinon retourner null
 	 * @param jeu

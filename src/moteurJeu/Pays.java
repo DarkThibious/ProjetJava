@@ -8,6 +8,7 @@ import java.util.ArrayList;
  */
 public class Pays
 {
+//	public static final int coop[][];
 	public String nom;
 	public Enqueteur enqueteur;
 	public int nbDénonciations;
@@ -55,4 +56,27 @@ public class Pays
 		return nom;
 	}
 	
+	public void nouvelleRequete(Enqueteur demandeur, Proprietaire demande)
+	{
+		if(demande.residence == this)
+		{
+			new Requete(demandeur, demande, 1);
+		}
+		else
+		{
+			new Requete(demandeur, (Proprietaire) null, 1);
+		}		
+	}
+	
+	public void nouvelleRequete(Enqueteur demandeur, Societe demande)
+	{
+		if(demande.residence == this)
+		{
+			new Requete(demandeur, (Propriete) demande, 1);
+		}
+		else
+		{
+			new Requete(demandeur, (Propriete) null, 1);
+		}		
+	}
 }
